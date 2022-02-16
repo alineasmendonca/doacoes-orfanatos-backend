@@ -205,11 +205,5 @@ public class Doacao implements Serializable{
 		Doacao other = (Doacao) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
-	
-	
-	
 
 }
