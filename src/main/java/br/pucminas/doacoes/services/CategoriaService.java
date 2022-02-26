@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.pucminas.doacoes.domain.Categoria;
 import br.pucminas.doacoes.dtos.CategoriaDTO;
 import br.pucminas.doacoes.repositories.CategoriaRepository;
+import br.pucminas.doacoes.services.exceptions.DataIntegrityViolationException;
 import br.pucminas.doacoes.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -40,7 +41,12 @@ public class CategoriaService {
 
 	public void delete(Integer id) {
 		findById(id);
-		repository.deleteById(id);
+		repository.deleteById(id);	
+//		try {
+//			repository.deleteById(id);	
+//		} catch (DataIntegrityViolationException e) {
+//			throw new DataIntegrityViolationException("Categoria não pode ser deletada. Ela possui doações associadas.");
+//		}
 		
 	}
 

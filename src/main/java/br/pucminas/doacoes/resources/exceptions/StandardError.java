@@ -1,4 +1,4 @@
-package br.pucminas.doacoes.resources;
+package br.pucminas.doacoes.resources.exceptions;
 
 public class StandardError {
 	private Long timeStamp;
