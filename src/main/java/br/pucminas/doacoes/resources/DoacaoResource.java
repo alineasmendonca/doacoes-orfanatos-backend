@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.pucminas.doacoes.domain.Doacao;
@@ -32,9 +33,16 @@ public class DoacaoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@GetMapping
+	@GetMapping(value= "/todas")
 	public ResponseEntity<List<DoacaoDTO>> findAll(){
 		List<Doacao> doacoes = service.findAll();
+		List<DoacaoDTO> doacoesDto = doacoes.stream().map(obj -> new DoacaoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(doacoesDto);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<DoacaoDTO>> findAllByCategoria(@RequestParam(value="categoria", defaultValue = "0") Integer idCategoria){
+		List<Doacao> doacoes = service.findAllByCategoria(idCategoria);
 		List<DoacaoDTO> doacoesDto = doacoes.stream().map(obj -> new DoacaoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(doacoesDto);
 	}

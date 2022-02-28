@@ -17,6 +17,9 @@ public class DoacaoService {
 	@Autowired
 	private DoacaoRepository repository;
 	
+	@Autowired
+	private CategoriaService categoriaService;
+	
 	public Doacao findById(Integer id) {
 		Optional<Doacao> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id:" + id + ", Tipo: " + Doacao.class.getName()));
@@ -52,6 +55,11 @@ public class DoacaoService {
 //			throw new DataIntegrityViolationException("Categoria não pode ser deletada. Ela possui doações associadas.");
 //		}
 		
+	}
+
+	public List<Doacao> findAllByCategoria(Integer categoria_id) {
+		categoriaService.findById(categoria_id);
+		return repository.findAllByCategoria(categoria_id);
 	}
 
 }
