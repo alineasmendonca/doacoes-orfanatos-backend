@@ -5,6 +5,9 @@ import java.util.Date;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,8 +22,14 @@ public class DoacaoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	
+	@NotEmpty(message = "O Campo QUANTIDADE é obrigatório")
 	private Integer quantidade;
+	
+	@NotEmpty(message = "O Campo Descrição é obrigatório")
+	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 200 caracteres")
 	private String descricao;
+	
 	private Categoria categoria;
 	private Date dataCadastro;
 	private Date dataLiberacao;

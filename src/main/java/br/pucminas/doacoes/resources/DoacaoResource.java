@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,6 +24,7 @@ import br.pucminas.doacoes.domain.Doacao;
 import br.pucminas.doacoes.dtos.DoacaoDTO;
 import br.pucminas.doacoes.services.DoacaoService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/doacoes")
 public class DoacaoResource {
@@ -50,14 +54,14 @@ public class DoacaoResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<DoacaoDTO> update(@PathVariable Integer id, @RequestBody Doacao obj){
+	public ResponseEntity<DoacaoDTO> update(@PathVariable Integer id, @Valid @RequestBody Doacao obj){
 		Doacao newObj = service.update(id, obj);
 		return ResponseEntity.ok().body(new DoacaoDTO(newObj));
 		
 	}
 	
 	@PatchMapping(value = "/{id}")
-	public ResponseEntity<DoacaoDTO> updatePatch(@PathVariable Integer id, @RequestBody Doacao obj){
+	public ResponseEntity<DoacaoDTO> updatePatch(@PathVariable Integer id, @Valid  @RequestBody Doacao obj){
 		Doacao newObj = service.update(id, obj);
 		return ResponseEntity.ok().body(new DoacaoDTO(newObj));
 		
@@ -78,7 +82,7 @@ public class DoacaoResource {
 	
 	
 	@PostMapping(value= "/incluir")
-	public ResponseEntity<Doacao> create(@RequestBody Doacao obj){
+	public ResponseEntity<Doacao> create(@Valid @RequestBody Doacao obj){
 		obj = service.create(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
