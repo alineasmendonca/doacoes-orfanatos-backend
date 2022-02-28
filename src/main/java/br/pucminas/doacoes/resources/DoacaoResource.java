@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,13 +34,6 @@ public class DoacaoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@GetMapping(value= "/todas")
-	public ResponseEntity<List<DoacaoDTO>> findAll(){
-		List<Doacao> doacoes = service.findAll();
-		List<DoacaoDTO> doacoesDto = doacoes.stream().map(obj -> new DoacaoDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(doacoesDto);
-	}
-	
 	@GetMapping
 	public ResponseEntity<List<DoacaoDTO>> findAllByCategoria(@RequestParam(value="categoria", defaultValue = "0") Integer idCategoria){
 		List<Doacao> doacoes = service.findAllByCategoria(idCategoria);
@@ -48,15 +42,23 @@ public class DoacaoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Doacao> create(@RequestBody Doacao obj){
-		obj = service.create(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+	public ResponseEntity<Doacao> create(@RequestParam(value = "categoria", defaultValue =  "0") Integer categoria_id, 
+			@RequestBody Doacao obj){
+		Doacao newObj = service.create(categoria_id, obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<DoacaoDTO> update(@PathVariable Integer id, @RequestBody DoacaoDTO objDto){
-		Doacao newObj = service.update(id, objDto);
+	public ResponseEntity<DoacaoDTO> update(@PathVariable Integer id, @RequestBody Doacao obj){
+		Doacao newObj = service.update(id, obj);
+		return ResponseEntity.ok().body(new DoacaoDTO(newObj));
+		
+	}
+	
+	@PatchMapping(value = "/{id}")
+	public ResponseEntity<DoacaoDTO> updatePatch(@PathVariable Integer id, @RequestBody Doacao obj){
+		Doacao newObj = service.update(id, obj);
 		return ResponseEntity.ok().body(new DoacaoDTO(newObj));
 		
 	}
@@ -65,6 +67,21 @@ public class DoacaoResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(value= "/todas")
+	public ResponseEntity<List<DoacaoDTO>> findAll(){
+		List<Doacao> doacoes = service.findAll();
+		List<DoacaoDTO> doacoesDto = doacoes.stream().map(obj -> new DoacaoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(doacoesDto);
+	}
+	
+	
+	@PostMapping(value= "/incluir")
+	public ResponseEntity<Doacao> create(@RequestBody Doacao obj){
+		obj = service.create(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 
 

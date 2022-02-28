@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.pucminas.doacoes.domain.Categoria;
 import br.pucminas.doacoes.domain.Doacao;
 import br.pucminas.doacoes.dtos.DoacaoDTO;
 import br.pucminas.doacoes.repositories.DoacaoRepository;
@@ -34,16 +35,22 @@ public class DoacaoService {
 		return repository.save(obj);
 	}
 
-	public Doacao update(Integer id, DoacaoDTO objDto) {
-		Doacao obj = findById(id);
-		obj.setCategoria(objDto.getCategoria());
-		obj.setDescricao(objDto.getDescricao());
-		obj.setDataAutorizacao(objDto.getDataAutorizacao());
-		obj.setDataLiberacao(objDto.getDataLiberacao());
-		obj.setDataCadastro(objDto.getDataCadastro());
-		obj.setIdDoador(objDto.getIdDoador());
-		obj.setIdOrfanatoContemplado(objDto.getIdOrfanatoContemplado());
-		return repository.save(obj);
+	public Doacao update(Integer id, Doacao obj) {
+		Doacao newObj = findById(id);
+		updateData(newObj, obj);
+		return repository.save(newObj);
+	}
+
+	private void updateData(Doacao newObj, Doacao obj) {
+		newObj.setCategoria(obj.getCategoria());
+		newObj.setQuantidade(obj.getQuantidade());
+		newObj.setDescricao(obj.getDescricao());
+		newObj.setDataAutorizacao(obj.getDataAutorizacao());
+		newObj.setDataLiberacao(obj.getDataLiberacao());
+		newObj.setDataCadastro(obj.getDataCadastro());
+		newObj.setIdDoador(obj.getIdDoador());
+		newObj.setIdOrfanatoContemplado(obj.getIdOrfanatoContemplado());
+		
 	}
 
 	public void delete(Integer id) {
@@ -60,6 +67,13 @@ public class DoacaoService {
 	public List<Doacao> findAllByCategoria(Integer categoria_id) {
 		categoriaService.findById(categoria_id);
 		return repository.findAllByCategoria(categoria_id);
+	}
+
+	public Doacao create(Integer categoria_id, Doacao obj) {
+		obj.setId(null);
+		Categoria cat = categoriaService.findById(categoria_id);
+		obj.setCategoria(cat);
+		return repository.save(obj);
 	}
 
 }
