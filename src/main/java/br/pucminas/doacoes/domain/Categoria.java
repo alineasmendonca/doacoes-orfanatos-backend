@@ -29,7 +29,7 @@ public class Categoria implements Serializable{
 	private String nome;
 	
 	@NotEmpty(message = "O Campo NOME é obrigatório")
-	@Length(min = 3, max = 200, message = "O Campo NOME deve ter entre 3 e 200 caracteres")
+	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 200 caracteres")
 	private String descricao;
 	
 	@OneToMany(mappedBy = "categoria")
