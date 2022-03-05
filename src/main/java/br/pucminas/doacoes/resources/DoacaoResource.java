@@ -49,7 +49,7 @@ public class DoacaoResource {
 	public ResponseEntity<Doacao> create(@RequestParam(value = "categoria", defaultValue =  "0") Integer categoria_id, 
 			@RequestBody Doacao obj){
 		Doacao newObj = service.create(categoria_id, obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}").buildAndExpand(newObj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/doacoes/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	

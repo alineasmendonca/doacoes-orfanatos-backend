@@ -26,7 +26,7 @@ public class DoacaoDTO implements Serializable{
 	@NotEmpty(message = "O Campo QUANTIDADE é obrigatório")
 	private Integer quantidade;
 	
-	@NotEmpty(message = "O Campo Descrição é obrigatório")
+	@NotEmpty(message = "O Campo DESCRIÇÃO é obrigatório")
 	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 200 caracteres")
 	private String descricao;
 	
