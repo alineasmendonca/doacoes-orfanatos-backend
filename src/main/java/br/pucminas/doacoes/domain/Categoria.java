@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -28,7 +29,7 @@ public class Categoria implements Serializable{
 	@Length(min = 3, max = 100, message = "O Campo NOME deve ter entre 3 e 100 caracteres")
 	private String nome;
 	
-	@NotEmpty(message = "O Campo NOME é obrigatório")
+	@NotEmpty(message = "O Campo DESCRIÇÃO é obrigatório")
 	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 200 caracteres")
 	private String descricao;
 	
@@ -44,6 +45,8 @@ public class Categoria implements Serializable{
 		this.nome = nome;
 		this.descricao = descricao;
 		this.doacoes = doacoes;
+		
+		
 	}
 	
 	public Categoria(Integer id, String nome, String descricao) {
@@ -71,6 +74,7 @@ public class Categoria implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
 	public List<Doacao> getDoacoes() {
 		return doacoes;
 	}
@@ -92,9 +96,5 @@ public class Categoria implements Serializable{
 		Categoria other = (Categoria) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
-	
 
 }

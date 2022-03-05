@@ -3,6 +3,7 @@ package br.pucminas.doacoes.dtos;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -23,7 +24,6 @@ public class CategoriaDTO implements Serializable{
 	@NotEmpty(message = "O Campo DESCRIÇÃO é obrigatório")
 	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 200 caracteres")
 	private String descricao;
-	
 	
 	public CategoriaDTO() {
 		super();
@@ -66,10 +66,5 @@ public class CategoriaDTO implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	
-	
-	
-	
 
 }

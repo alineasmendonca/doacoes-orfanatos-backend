@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -23,7 +24,7 @@ public class DoacaoDTO implements Serializable{
 	
 	private Integer id;
 	
-	@NotEmpty(message = "O Campo QUANTIDADE é obrigatório")
+	@NotNull(message = "O Campo QUANTIDADE é obrigatório")
 	private Integer quantidade;
 	
 	@NotEmpty(message = "O Campo DESCRIÇÃO é obrigatório")
@@ -41,6 +42,7 @@ public class DoacaoDTO implements Serializable{
 	public DoacaoDTO(Doacao obj) {
 		super();
 		this.id = obj.getId();
+		this.quantidade = obj.getQuantidade();
 		this.descricao = obj.getDescricao();
 		this.dataAutorizacao = obj.getDataAutorizacao();
 		this.dataCadastro = obj.getDataCadastro();

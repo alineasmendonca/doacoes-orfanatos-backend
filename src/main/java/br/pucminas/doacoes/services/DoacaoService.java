@@ -1,5 +1,6 @@
 package br.pucminas.doacoes.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,5 +76,15 @@ public class DoacaoService {
 		obj.setCategoria(cat);
 		return repository.save(obj);
 	}
+
+	
+	/*public Doacao create(Integer categoria_id, DoacaoDTO objDto) {
+		// TODO Auto-generated method stub
+		Categoria cat = categoriaService.findById(categoria_id);
+		Doacao doacao = new Doacao(null, objDto.getQuantidade(), objDto.getDescricao(), cat, new Date(),
+				null, null, null, null);
+		
+		return repository.save(doacao);
+	}*/
 
 }

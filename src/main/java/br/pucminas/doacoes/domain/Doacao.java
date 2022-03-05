@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -26,10 +27,10 @@ public class Doacao implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	// @NotEmpty(message = "O Campo QUANTIDADE é obrigatório")
+	@NotNull(message = "O Campo QUANTIDADE é obrigatório")
 	private Integer quantidade;
 	
-	@NotEmpty(message = "O Campo Descrição é obrigatório")
+	@NotEmpty(message = "O Campo DESCRIÇÃO é obrigatório")
 	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 200 caracteres")
 	private String descricao;
 	

@@ -24,6 +24,8 @@ import br.pucminas.doacoes.domain.Doacao;
 import br.pucminas.doacoes.dtos.DoacaoDTO;
 import br.pucminas.doacoes.services.DoacaoService;
 
+import org.springframework.validation.annotation.Validated;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/doacoes")
@@ -45,6 +47,7 @@ public class DoacaoResource {
 		return ResponseEntity.ok().body(doacoesDto);
 	}
 	
+	// Antes
 	@PostMapping
 	public ResponseEntity<Doacao> create(@RequestParam(value = "categoria", defaultValue =  "0") Integer categoria_id, 
 			@RequestBody Doacao obj){
