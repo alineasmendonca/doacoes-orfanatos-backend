@@ -1,4 +1,4 @@
-package br.pucminas.doacoes.config;
+package br.pucminas.doacoes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

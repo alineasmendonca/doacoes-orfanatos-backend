@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.pucminas.doacoes.domain.Categoria;
 import br.pucminas.doacoes.domain.Doacao;
@@ -14,6 +15,7 @@ import br.pucminas.doacoes.repositories.CategoriaRepository;
 import br.pucminas.doacoes.repositories.DoacaoRepository;
 
 @SpringBootApplication
+@RestController
 public class BackendDoacoesApplication {
 	
 	public static void main(String[] args) {
