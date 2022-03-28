@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -37,12 +38,12 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@GetMapping
+	/*@GetMapping
 	public ResponseEntity<List<CategoriaDTO>> findAll(){
 		List<Categoria> categorias = service.findAll();
 		List<CategoriaDTO> categoriasDto = categorias.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(categoriasDto);
-	}
+	}*/
 	
 	@PostMapping
 	public ResponseEntity<Categoria> create(@Valid @RequestBody Categoria obj){
@@ -62,6 +63,15 @@ public class CategoriaResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<CategoriaDTO>> findByFiltros(@RequestParam(value = "nome", required = false) String nome,
+			@RequestParam(value = "descricao", required = false) String descricao) {
+		List<Categoria> lista = service.findByFiltros(nome, descricao);
+		List<CategoriaDTO> listaDTO = lista.stream().map(CategoriaDTO::new).collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listaDTO);
 	}
 
 }

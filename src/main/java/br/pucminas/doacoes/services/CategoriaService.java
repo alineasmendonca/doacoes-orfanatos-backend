@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import br.pucminas.doacoes.domain.Categoria;
 import br.pucminas.doacoes.dtos.CategoriaDTO;
@@ -49,5 +50,19 @@ public class CategoriaService {
 //		}
 		
 	}
+	
+	public List<Categoria> findByFiltros(String nome, String descricao) {
+
+        List<Categoria> lista = null;
+
+        if (!StringUtils.hasText(nome) && !StringUtils.hasText(descricao)) {
+            lista = repository.findAll();
+        } else {
+            nome = StringUtils.hasText(nome) ? nome.toLowerCase() : null;
+            descricao = StringUtils.hasText(descricao) ? descricao.toLowerCase() : null;
+            lista = repository.findByFiltros(nome, descricao);
+        }
+        return lista;
+    }
 
 }
