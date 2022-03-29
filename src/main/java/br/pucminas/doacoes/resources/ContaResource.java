@@ -14,12 +14,16 @@ import br.pucminas.doacoes.repositories.UsuarioRepository;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping("/contas")
+@RequestMapping(value="/contas")
 public class ContaResource {
 
-    private final ContaRepository repository;
-    private final UsuarioRepository usuarioRepository;
+	@Autowired
+    private ContaRepository repository;
+	
+	@Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private ContaResource(ContaRepository repository, UsuarioRepository appUserRepository){

@@ -1,6 +1,8 @@
 package br.pucminas.doacoes.resources;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,12 +15,13 @@ import br.pucminas.doacoes.services.UsuarioService;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping("/usuarios")
-@RequiredArgsConstructor
+@RequestMapping(value = "/usuarios")
 public class UsuarioResource {
 
-    private final UsuarioService service;
+	@Autowired
+    private UsuarioService service;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
