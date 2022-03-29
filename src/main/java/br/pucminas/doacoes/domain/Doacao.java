@@ -27,11 +27,11 @@ public class Doacao implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotNull(message = "O Campo Quantidade é obrigatório")
+	@NotNull(message = "O Campo QUANTIDADE é obrigatório")
 	private Integer quantidade;
 	
-	@NotEmpty(message = "O Campo Descrição é obrigatório")
-	@Length(min = 3, max = 200, message = "O Campo Descrição deve ter entre 3 e 200 caracteres")
+	@NotEmpty(message = "O Campo DESCRIÇÃO é obrigatório")
+	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 200 caracteres")
 	private String descricao;
 	
 	@JsonIgnore
