@@ -47,7 +47,8 @@ public class UsuarioDTO {
 	public UsuarioDTO(Integer id, @NotEmpty(message = "O Campo Login é obrigatório") String login,
 			@NotEmpty(message = "O Campo Nome é obrigatório") String nome,
 			@NotEmpty(message = "O Campo Telefone Celular é obrigatório") String telefoneCelular, String telefoneFixo,
-			Integer perfil, @NotEmpty(message = "O Campo Endereço é obrigatório") String endereco,
+			Integer perfil, 
+		    @NotEmpty(message = "O Campo Endereço é obrigatório") String endereco,
 			@NotEmpty(message = "O Campo Email é obrigatório") String email,
 			@NotEmpty(message = "O Campo Senha é obrigatório") String senha, boolean admin) {
 		super();
