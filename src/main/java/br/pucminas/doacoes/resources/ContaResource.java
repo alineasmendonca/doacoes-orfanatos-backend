@@ -5,10 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.pucminas.doacoes.domain.Account;
+import br.pucminas.doacoes.domain.Conta;
 import br.pucminas.doacoes.domain.Usuario;
-import br.pucminas.doacoes.dtos.AccountDTO;
-import br.pucminas.doacoes.repositories.AccountRepository;
+import br.pucminas.doacoes.dtos.ContaDTO;
+import br.pucminas.doacoes.repositories.ContaRepository;
 import br.pucminas.doacoes.repositories.UsuarioRepository;
 
 import javax.validation.Valid;
@@ -18,25 +18,25 @@ import java.util.List;
 @RequestMapping("/contas")
 public class ContaResource {
 
-    private final AccountRepository repository;
+    private final ContaRepository repository;
     private final UsuarioRepository appUserRepository;
 
     @Autowired
-    private ContaResource(AccountRepository repository, UsuarioRepository appUserRepository){
+    private ContaResource(ContaRepository repository, UsuarioRepository appUserRepository){
         this.repository = repository;
         this.appUserRepository = appUserRepository;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Account save(@RequestBody @Valid AccountDTO accountDTO) {
+    public Conta save(@RequestBody @Valid ContaDTO accountDTO) {
         String usernameAppUser = accountDTO.getUsernameAppUser();
 
         Usuario appUser =
                 this.appUserRepository.findByUsername(usernameAppUser)
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário inexistente"));
 
-        Account account = new Account();
+        Conta account = new Conta();
         account.setName(accountDTO.getName());
         account.setDescription(accountDTO.getDescription());
         account.setAppUser(appUser);
@@ -45,7 +45,7 @@ public class ContaResource {
     }
 
     @GetMapping("{id}")
-    public Account findById(@PathVariable Integer id){
+    public Conta findById(@PathVariable Integer id){
         return repository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta não encontrada"));
@@ -65,7 +65,7 @@ public class ContaResource {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update (@PathVariable Integer id, @RequestBody AccountDTO updatedAccountDTO) {
+    public void update (@PathVariable Integer id, @RequestBody ContaDTO updatedAccountDTO) {
         this.repository
                 .findById(id)
                 .map(account -> {
@@ -79,7 +79,7 @@ public class ContaResource {
 
     @GetMapping("{username}")
     @RequestMapping("/accountsByUsername")
-    public List<Account> getAllByUsername(@RequestParam(value = "username", required = true) String username){
+    public List<Conta> getAllByUsername(@RequestParam(value = "username", required = true) String username){
         return repository.findAllByUsernameOrderByNameAsc(username);
     }
 

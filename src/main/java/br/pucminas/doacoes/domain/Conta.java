@@ -4,8 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "account", schema = "public")
-public class Account {
+public class Conta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,7 +52,7 @@ public class Account {
 		this.appUser = appUser;
 	}
 
-	public Account(Integer id, @NotEmpty(message = "{campo.nome.obrigatorio}") String name, String description,
+	public Conta(Integer id, @NotEmpty(message = "{campo.nome.obrigatorio}") String name, String description,
 			Usuario appUser) {
 		super();
 		this.id = id;
@@ -62,7 +61,7 @@ public class Account {
 		this.appUser = appUser;
 	}
 
-	public Account() {
+	public Conta() {
 		super();
 	}
     

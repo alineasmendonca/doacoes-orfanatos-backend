@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-// @Table(name = "app_user", schema = "public")
 public class Usuario {
 
     @Id
