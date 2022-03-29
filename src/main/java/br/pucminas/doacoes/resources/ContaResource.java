@@ -16,13 +16,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contas")
-public class AccountController {
+public class ContaResource {
 
     private final AccountRepository repository;
     private final UsuarioRepository appUserRepository;
 
     @Autowired
-    private AccountController(AccountRepository repository, UsuarioRepository appUserRepository){
+    private ContaResource(AccountRepository repository, UsuarioRepository appUserRepository){
         this.repository = repository;
         this.appUserRepository = appUserRepository;
     }

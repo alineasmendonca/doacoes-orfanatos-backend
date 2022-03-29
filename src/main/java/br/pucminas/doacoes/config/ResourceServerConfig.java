@@ -20,9 +20,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .anyRequest().denyAll();*/
     	http
         .authorizeRequests()
-        .antMatchers("/usuarios").permitAll()
+        .antMatchers("/usuarios/**").permitAll()
         .antMatchers("/categorias/**", "/doacoes/**",
-                "/accounts/**", "/orfanatos/**").authenticated()
+                "/contas/**", "/orfanatos/**").authenticated()
         .anyRequest().denyAll();
     }
 }
