@@ -1,14 +1,16 @@
 package br.pucminas.doacoes.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-/*@Data
-@NoArgsConstructor*/
-public class AccountDTO {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ContaDTO {
 
     private Integer id;
 
@@ -20,7 +22,7 @@ public class AccountDTO {
     @NotEmpty(message = "{campo.usuario.obrigatorio}")
     private String usernameAppUser;
 
-	public Integer getId() {
+	/*public Integer getId() {
 		return id;
 	}
 
@@ -52,7 +54,7 @@ public class AccountDTO {
 		this.usernameAppUser = usernameAppUser;
 	}
 
-	public AccountDTO(Integer id, @NotEmpty(message = "{campo.nome.obrigatorio}") String name, String description,
+	public ContaDTO(Integer id, @NotEmpty(message = "{campo.nome.obrigatorio}") String name, String description,
 			@NotEmpty(message = "{campo.usuario.obrigatorio}") String usernameAppUser) {
 		super();
 		this.id = id;
@@ -61,9 +63,9 @@ public class AccountDTO {
 		this.usernameAppUser = usernameAppUser;
 	}
 
-	public AccountDTO() {
+	public ContaDTO() {
 		super();
-	}
+	}*/
     
     
 }

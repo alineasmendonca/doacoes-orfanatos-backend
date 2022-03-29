@@ -22,9 +22,9 @@ public class UsuarioResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody @Valid Usuario appUser){
+    public void save(@RequestBody @Valid Usuario usuario){
         try {
-            service.save(appUser);
+            service.save(usuario);
         } catch (RegisteredUserException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -32,22 +32,26 @@ public class UsuarioResource {
 
     @GetMapping
     public List<Usuario> getAll(){
-        return service.findAllOrderByUsernameAsc();
+        return service.findAllOrdernadoPeloLoginAsc();
     }
 
     @GetMapping("{id}")
     public UsuarioDTO findById(@PathVariable Integer id){
-    	Usuario appUser = service
+    	Usuario usuario = service
                 .findById(id);
 
     	UsuarioDTO appUserDTO = new UsuarioDTO();
-        appUserDTO.setId(appUser.getId());
-        appUserDTO.setUsername(appUser.getUsername());
-        appUserDTO.setName(appUser.getName());
-        appUserDTO.setEmail(appUser.getEmail());
-        appUserDTO.setAdmin(appUser.isAdmin());
-        appUserDTO.setPhone(appUser.getPhone());
-        appUserDTO.setPassword(appUser.getPassword());
+        appUserDTO.setId(usuario.getId());
+        appUserDTO.setLogin(usuario.getLogin());
+        appUserDTO.setNome(usuario.getNome());
+        appUserDTO.setEmail(usuario.getEmail());
+        appUserDTO.setAdmin(usuario.isAdmin());
+        appUserDTO.setTelefoneCelular(usuario.getTelefoneCelular());
+        appUserDTO.setTelefoneFixo(usuario.getTelefoneFixo());
+        appUserDTO.setSenha(usuario.getSenha());
+        appUserDTO.setPerfil(usuario.getPerfil());
+        appUserDTO.setEndereco(usuario.getEndereco());
+        appUserDTO.setSenha(usuario.getSenha());
 
         System.out.println("Usuário: ");
         System.out.println(appUserDTO);
@@ -58,27 +62,30 @@ public class UsuarioResource {
     @RequestMapping("/userByUsername")
     public UsuarioDTO findByUsername(@RequestParam(value = "username", required = true) String username){
     	Usuario appUser = service
-                .findByUsername(username);
+                .findByLogin(username);
 
-    	UsuarioDTO appUserDTO = new UsuarioDTO();
-        appUserDTO.setId(appUser.getId());
-        appUserDTO.setUsername(appUser.getUsername());
-        appUserDTO.setName(appUser.getName());
-        appUserDTO.setEmail(appUser.getEmail());
-        appUserDTO.setAdmin(appUser.isAdmin());
-        appUserDTO.setPhone(appUser.getPhone());
-        appUserDTO.setPassword(appUser.getPassword());
+    	UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setId(appUser.getId());
+        usuarioDTO.setLogin(appUser.getLogin());
+        usuarioDTO.setNome(appUser.getNome());
+        usuarioDTO.setEmail(appUser.getEmail());
+        usuarioDTO.setAdmin(appUser.isAdmin());
+        usuarioDTO.setTelefoneCelular(appUser.getTelefoneCelular());
+        usuarioDTO.setTelefoneFixo(appUser.getTelefoneFixo());
+        usuarioDTO.setSenha(appUser.getSenha());
+        usuarioDTO.setPerfil(appUser.getPerfil());
+        usuarioDTO.setEndereco(appUser.getEndereco());
 
         System.out.println("Usuário: ");
-        System.out.println(appUserDTO);
-        return appUserDTO;
+        System.out.println(usuarioDTO);
+        return usuarioDTO;
     }
 
     @GetMapping("{username}")
     @RequestMapping("/userIsAdmin")
     public boolean isUserAdmin(@RequestParam(value = "username", required = true) String username){
     	Usuario appUser = service
-                .findByUsername(username);
+                .findByLogin(username);
         return appUser.isAdmin();
     }
 

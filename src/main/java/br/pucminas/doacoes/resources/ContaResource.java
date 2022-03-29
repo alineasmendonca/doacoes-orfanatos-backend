@@ -5,10 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.pucminas.doacoes.domain.Account;
+import br.pucminas.doacoes.domain.Conta;
 import br.pucminas.doacoes.domain.Usuario;
-import br.pucminas.doacoes.dtos.AccountDTO;
-import br.pucminas.doacoes.repositories.AccountRepository;
+import br.pucminas.doacoes.dtos.ContaDTO;
+import br.pucminas.doacoes.repositories.ContaRepository;
 import br.pucminas.doacoes.repositories.UsuarioRepository;
 
 import javax.validation.Valid;
@@ -16,36 +16,36 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contas")
-public class AccountController {
+public class ContaResource {
 
-    private final AccountRepository repository;
-    private final UsuarioRepository appUserRepository;
+    private final ContaRepository repository;
+    private final UsuarioRepository usuarioRepository;
 
     @Autowired
-    private AccountController(AccountRepository repository, UsuarioRepository appUserRepository){
+    private ContaResource(ContaRepository repository, UsuarioRepository appUserRepository){
         this.repository = repository;
-        this.appUserRepository = appUserRepository;
+        this.usuarioRepository = appUserRepository;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Account save(@RequestBody @Valid AccountDTO accountDTO) {
-        String usernameAppUser = accountDTO.getUsernameAppUser();
+    public Conta save(@RequestBody @Valid ContaDTO contaDTO) {
+        String loginUsuario = contaDTO.getUsernameAppUser();
 
         Usuario appUser =
-                this.appUserRepository.findByUsername(usernameAppUser)
+                this.usuarioRepository.findByLogin(loginUsuario)
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário inexistente"));
 
-        Account account = new Account();
-        account.setName(accountDTO.getName());
-        account.setDescription(accountDTO.getDescription());
-        account.setAppUser(appUser);
+        Conta conta = new Conta();
+        conta.setName(contaDTO.getName());
+        conta.setDescription(contaDTO.getDescription());
+        conta.setUsuario(appUser);
 
-        return repository.save(account);
+        return repository.save(conta);
     }
 
     @GetMapping("{id}")
-    public Account findById(@PathVariable Integer id){
+    public Conta findById(@PathVariable Integer id){
         return repository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta não encontrada"));
@@ -56,8 +56,8 @@ public class AccountController {
     public void delete (@PathVariable Integer id) {
         this.repository
                 .findById(id)
-                .map(account -> {
-                    repository.delete(account);
+                .map(conta -> {
+                    repository.delete(conta);
                     return Void.TYPE;
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta não encontrada"));
@@ -65,13 +65,13 @@ public class AccountController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update (@PathVariable Integer id, @RequestBody AccountDTO updatedAccountDTO) {
+    public void update (@PathVariable Integer id, @RequestBody ContaDTO contaAtualizadaDTO) {
         this.repository
                 .findById(id)
-                .map(account -> {
-                    account.setName(updatedAccountDTO.getName());
-                    account.setDescription(updatedAccountDTO.getDescription());
-                    this.repository.save(account);
+                .map(conta -> {
+                    conta.setName(contaAtualizadaDTO.getName());
+                    conta.setDescription(contaAtualizadaDTO.getDescription());
+                    this.repository.save(conta);
                     return Void.TYPE;
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta não encontrada"));
@@ -79,8 +79,8 @@ public class AccountController {
 
     @GetMapping("{username}")
     @RequestMapping("/accountsByUsername")
-    public List<Account> getAllByUsername(@RequestParam(value = "username", required = true) String username){
-        return repository.findAllByUsernameOrderByNameAsc(username);
+    public List<Conta> getAllByUsername(@RequestParam(value = "username", required = true) String username){
+        return repository.findAllByLoginOrderByNameAsc(username);
     }
 
 }

@@ -4,8 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "account", schema = "public")
-public class Account {
+public class Conta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +17,8 @@ public class Account {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "id_app_user")
-    private Usuario appUser;
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
 	public Integer getId() {
 		return id;
@@ -45,24 +44,24 @@ public class Account {
 		this.description = description;
 	}
 
-	public Usuario getAppUser() {
-		return appUser;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setAppUser(Usuario appUser) {
-		this.appUser = appUser;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public Account(Integer id, @NotEmpty(message = "{campo.nome.obrigatorio}") String name, String description,
-			Usuario appUser) {
+	public Conta(Integer id, @NotEmpty(message = "{campo.nome.obrigatorio}") String name, String description,
+			Usuario usuario) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.appUser = appUser;
+		this.usuario = usuario;
 	}
 
-	public Account() {
+	public Conta() {
 		super();
 	}
     

@@ -14,7 +14,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.pucminas.doacoes.domain.Categoria;
 import br.pucminas.doacoes.domain.Doacao;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DoacaoDTO implements Serializable{
 
 	/**
@@ -38,8 +44,21 @@ public class DoacaoDTO implements Serializable{
 	private Integer idDoador;
 	private Integer idOrfanatoContemplado;
 	
-	
 	public DoacaoDTO(Doacao obj) {
+		super();
+		this.id = obj.getId();
+		this.quantidade = obj.getQuantidade();
+		this.descricao = obj.getDescricao();
+		this.dataAutorizacao = obj.getDataAutorizacao();
+		this.dataCadastro = obj.getDataCadastro();
+		this.dataLiberacao = obj.getDataLiberacao();
+		this.categoria = obj.getCategoria();
+		this.idDoador = obj.getIdDoador();
+		this.idOrfanatoContemplado = obj.getIdOrfanatoContemplado();
+	}
+	
+	
+	/*public DoacaoDTO(Doacao obj) {
 		super();
 		this.id = obj.getId();
 		this.quantidade = obj.getQuantidade();
@@ -146,7 +165,7 @@ public class DoacaoDTO implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+*/
 
 	
 

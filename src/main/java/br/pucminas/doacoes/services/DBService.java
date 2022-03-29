@@ -38,8 +38,10 @@ public class DBService {
 		Doacao doacao4 = new Doacao(null, 3, "Mamadeiras", cat4, null, null, null, null, null);
 		Doacao doacao5 = new Doacao(null, 7, "Lápis", cat5, null, null, null, null, null);
 		
-		Usuario usuario1 = new Usuario(1, "alineas", "Aline Alves da Silva Mendonça", "(85)999999999", "aline@gmail.com", "12345", true);
-		Usuario usuario2 = new Usuario(2, "admin", "Usuário Administrador do Sistema", "(85)988888888", "administrador@gmail.com", "admin", true);
+		Usuario usuario1 = new Usuario(1, "alineas", 1, "Aline Alves da Silva Mendonça", "(85)911111111", "(85)34781111", "Avenida Pontes Vieira 111", "aline@gmail.com", "12345", true);
+		Usuario usuario2 = new Usuario(2, "admin", 1, "Usuário Administrador do Sistema", "(85)922222222", "(85)34782222", "Avenida Pontes Vieira 222", "admin@gmail.com", "admin", true);
+		Usuario usuario3 = new Usuario(3, "doador", 2, "Usuário Doador", "(85)933333333", "(85)34783333", "Avenida Pontes Vieira 333", "doador@gmail.com", "doador", false);
+		Usuario usuario4 = new Usuario(4, "orfanato", 3, "Usuário Representante de Orfanato", "(85)944444444", "(85)34784444", "Avenida Pontes Vieira 444", "orfanato@gmail.com", "orfanato", false);
 		
 		cat1.getDoacoes().addAll(Arrays.asList(doacao1));
 		cat2.getDoacoes().addAll(Arrays.asList(doacao2));
@@ -49,7 +51,7 @@ public class DBService {
 		
         this.categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5));
         this.doacaoRepository.saveAll(Arrays.asList(doacao1, doacao2, doacao3, doacao4, doacao5));	
-        this.usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2));
+        this.usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2, usuario3, usuario4));
 		
 	}
 
