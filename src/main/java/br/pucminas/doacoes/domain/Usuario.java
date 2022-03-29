@@ -13,31 +13,62 @@ import lombok.NoArgsConstructor;
 @Data
 public class Usuario {
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(unique = true, name = "login")
-    @NotEmpty(message = "{campo.login.obrigatorio}")
+    @NotEmpty(message = "O Campo LOGIN é obrigatório")
     private String username;
 
     @Column
-    @NotEmpty(message = "{campo.nome.obrigatorio}")
+    @NotEmpty(message = "O Campo NOME é obrigatório")
     private String name;
 
     @Column
-    @NotEmpty(message = "{campo.telefone.obrigatorio}")
+    @NotEmpty(message = "O Campo TELEFONE é obrigatório")
     private String phone;
 
     @Column
-    @NotEmpty(message = "{campo.email.obrigatorio}")
+    @NotEmpty(message = "O Campo EMAIL é obrigatório")
     private String email;
 
     @Column(name = "senha")
-    @NotEmpty(message = "{campo.senha.obrigatorio}")
+    @NotEmpty(message = "O Campo SENHA é obrigatório")
     private String password;
 
     @Column
+    private boolean admin = false;*/
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(unique = true, name = "login")
+    @NotEmpty(message = "O Campo LOGIN é obrigatório")
+    private String username;
+
+    @Column
+    @NotEmpty(message = "O Campo NOME é obrigatório")
+    private String nome;
+
+    @Column
+    @NotEmpty(message = "O Campo TELEFONE CELULAR é obrigatório")
+    private String telefoneCelular;
+
+    @Column
+    @NotEmpty(message = "O Campo EMAIL é obrigatório")
+    private String email;
+
+    @Column
+    @NotEmpty(message = "O Campo SENHA é obrigatório")
+    private String senha;
+
+    @Column
     private boolean admin = false;
+    
+    @Column
+    @NotEmpty(message = "O Campo TELEFONE FIXO é obrigatório")
+    private String telefoneFixo;
 
 }

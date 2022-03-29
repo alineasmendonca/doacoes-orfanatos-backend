@@ -30,11 +30,12 @@ public class UsuarioService implements UserDetailsService {
 
         if (appUser == null || !appUser.isPresent()) {
         	Usuario userAdmin = new Usuario();
-            userAdmin.setUsername("admin");
-            userAdmin.setName("Admin");
-            userAdmin.setPassword("12345");
-            userAdmin.setPhone("(31) 99245-4848");
-            userAdmin.setEmail("juquisilva@gmail.com");
+            userAdmin.setUsername("12345");
+            userAdmin.setNome("Admin");
+            userAdmin.setSenha("12345");
+            userAdmin.setTelefoneCelular("(85) 999999999");
+            userAdmin.setTelefoneFixo("(85) 999999999");
+            userAdmin.setEmail("aline@gmail.com");
             userAdmin.setAdmin(true);
             repository.save(userAdmin);
         }
@@ -84,7 +85,7 @@ public class UsuarioService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User
                 .builder()
                 .username(appUser.getUsername())
-                .password(appUser.getPassword())
+                .password(appUser.getSenha())
                 .roles("USER")
                 .build()
                 ;
@@ -93,10 +94,11 @@ public class UsuarioService implements UserDetailsService {
     public void update(UsuarioDTO updatedAppUserDTO) {
     	Usuario appUser = findByUsername(updatedAppUserDTO.getUsername());
 
-        appUser.setName(updatedAppUserDTO.getName());
+        appUser.setNome(updatedAppUserDTO.getNome());
         appUser.setEmail(updatedAppUserDTO.getEmail());
-        appUser.setPhone(updatedAppUserDTO.getPhone());
-        appUser.setPassword(updatedAppUserDTO.getPassword());
+        appUser.setTelefoneCelular(updatedAppUserDTO.getTelefoneCelular());
+        appUser.setSenha(updatedAppUserDTO.getSenha());
+        appUser.setTelefoneFixo(updatedAppUserDTO.getTelefoneFixo());
         appUser.setAdmin(updatedAppUserDTO.isAdmin());
 
         this.repository.save(appUser);

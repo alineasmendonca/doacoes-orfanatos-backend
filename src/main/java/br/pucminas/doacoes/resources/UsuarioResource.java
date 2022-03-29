@@ -43,11 +43,11 @@ public class UsuarioResource {
     	UsuarioDTO appUserDTO = new UsuarioDTO();
         appUserDTO.setId(appUser.getId());
         appUserDTO.setUsername(appUser.getUsername());
-        appUserDTO.setName(appUser.getName());
+        appUserDTO.setNome(appUser.getNome());
         appUserDTO.setEmail(appUser.getEmail());
         appUserDTO.setAdmin(appUser.isAdmin());
-        appUserDTO.setPhone(appUser.getPhone());
-        appUserDTO.setPassword(appUser.getPassword());
+        appUserDTO.setTelefoneCelular(appUser.getTelefoneCelular());
+        appUserDTO.setSenha(appUser.getSenha());
 
         System.out.println("Usuário: ");
         System.out.println(appUserDTO);
@@ -63,11 +63,11 @@ public class UsuarioResource {
     	UsuarioDTO appUserDTO = new UsuarioDTO();
         appUserDTO.setId(appUser.getId());
         appUserDTO.setUsername(appUser.getUsername());
-        appUserDTO.setName(appUser.getName());
+        appUserDTO.setNome(appUser.getNome());
         appUserDTO.setEmail(appUser.getEmail());
         appUserDTO.setAdmin(appUser.isAdmin());
-        appUserDTO.setPhone(appUser.getPhone());
-        appUserDTO.setPassword(appUser.getPassword());
+        appUserDTO.setTelefoneFixo(appUser.getTelefoneFixo());
+        appUserDTO.setSenha(appUser.getSenha());
 
         System.out.println("Usuário: ");
         System.out.println(appUserDTO);

@@ -14,11 +14,11 @@ public class ContaDTO {
 
     private Integer id;
 
-    @NotEmpty(message = "{campo.nome.obrigatorio}")
+    @NotEmpty(message = "O Campo NOME é obrigatório")
     private String name;
 
     private String description;
 
-    @NotEmpty(message = "{campo.usuario.obrigatorio}")
+    @NotEmpty(message = "O Campo USUARIO é obrigatório")
     private String usernameAppUser;
 }
