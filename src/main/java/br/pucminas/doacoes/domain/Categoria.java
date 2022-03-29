@@ -25,12 +25,12 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotEmpty(message = "O Campo NOME é obrigatório")
-	@Length(min = 3, max = 100, message = "O Campo NOME deve ter entre 3 e 100 caracteres")
+	@NotEmpty(message = "O Campo Nome é obrigatório")
+	@Length(min = 3, max = 100, message = "O Campo Nome deve ter entre 3 e 100 caracteres")
 	private String nome;
 	
-	@NotEmpty(message = "O Campo DESCRIÇÃO é obrigatório")
-	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 200 caracteres")
+	@NotEmpty(message = "O Campo Descrição é obrigatório")
+	@Length(min = 3, max = 200, message = "O Campo Descrição deve ter entre 3 e 200 caracteres")
 	private String descricao;
 	
 	@OneToMany(mappedBy = "categoria")

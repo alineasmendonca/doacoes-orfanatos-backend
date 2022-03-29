@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class UsuarioDTO {
 
     private Integer id;
@@ -40,7 +40,7 @@ public class UsuarioDTO {
     
     
 
-	/*public UsuarioDTO() {
+	public UsuarioDTO() {
 		super();
 	}
 
@@ -141,12 +141,5 @@ public class UsuarioDTO {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
-	}*/
-	
-	
-	
-    
-    
-    
-
+	}
 }

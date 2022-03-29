@@ -12,9 +12,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class CategoriaDTO implements Serializable{
 
 	/**
@@ -38,18 +38,10 @@ public class CategoriaDTO implements Serializable{
 		this.descricao = obj.getDescricao();
 	}
 	
-	/*public CategoriaDTO() {
+	
+	public CategoriaDTO() {
 		super();
 	}
-
-
-	public CategoriaDTO(Categoria obj) {
-		super();
-		this.id = obj.getId();
-		this.nome = obj.getNome();
-		this.descricao = obj.getDescricao();
-	}
-
 
 	public Integer getId() {
 		return id;
@@ -78,6 +70,6 @@ public class CategoriaDTO implements Serializable{
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}*/
+	}
 
 }

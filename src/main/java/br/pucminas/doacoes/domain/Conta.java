@@ -10,7 +10,7 @@ public class Conta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotEmpty(message = "{campo.nome.obrigatorio}")
+    @NotEmpty(message = "O Campo Nome é obrigatório")
     @Column(nullable = false)
     private String name;
 

@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class ContaDTO {
 
     private Integer id;
@@ -22,7 +22,7 @@ public class ContaDTO {
     @NotEmpty(message = "{campo.usuario.obrigatorio}")
     private String usernameAppUser;
 
-	/*public Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -65,7 +65,7 @@ public class ContaDTO {
 
 	public ContaDTO() {
 		super();
-	}*/
+	}
     
     
 }

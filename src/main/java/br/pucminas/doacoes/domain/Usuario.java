@@ -21,8 +21,6 @@ public class Usuario {
     
     private String telefoneFixo;
     
-    // @NotEmpty(message = "O Campo Perfil é obrigatório")
-    @Column(name="perfil")
     private Integer perfil;
     
     @NotEmpty(message = "O Campo Endereço é obrigatório")
