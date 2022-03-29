@@ -23,6 +23,7 @@ public class UsuarioResource {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid Usuario appUser){
+    	System.out.println(appUser);
         try {
             service.save(appUser);
         } catch (RegisteredUserException e){

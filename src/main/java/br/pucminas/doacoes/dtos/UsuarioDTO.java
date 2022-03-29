@@ -8,6 +8,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import br.pucminas.doacoes.domain.Categoria;
 
@@ -54,5 +55,11 @@ public class UsuarioDTO {
     
     @NotEmpty(message = "O Campo TELEFONE FIXO é obrigatório")
     private String telefoneFixo;
+    
+    @NotEmpty(message = "O Campo ENDEREÇO é obrigatório")
+    private String endereco;
+    
+    @NotNull(message = "O Campo QUANTIDADE é obrigatório")
+    private Integer perfil;
 
 }

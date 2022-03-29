@@ -2,6 +2,7 @@ package br.pucminas.doacoes.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -70,5 +71,13 @@ public class Usuario {
     @Column
     @NotEmpty(message = "O Campo TELEFONE FIXO é obrigatório")
     private String telefoneFixo;
+    
+    @Column
+    @NotEmpty(message = "O Campo ENDEREÇO é obrigatório")
+    private String endereco;
+    
+    @Column
+    @NotNull(message = "O Campo PERFIL é obrigatório")
+    private Integer perfil;
 
 }
