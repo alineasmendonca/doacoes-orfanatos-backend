@@ -3,7 +3,14 @@ package br.pucminas.doacoes.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Usuario {
 
     @Id
@@ -32,86 +39,5 @@ public class Usuario {
 
     @Column
     private boolean admin = false;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public boolean isAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
-
-	public Usuario(Integer id, @NotEmpty(message = "{campo.login.obrigatorio}") String username,
-			@NotEmpty(message = "{campo.nome.obrigatorio}") String name,
-			@NotEmpty(message = "{campo.telefone.obrigatorio}") String phone,
-			@NotEmpty(message = "{campo.email.obrigatorio}") String email,
-			@NotEmpty(message = "{campo.senha.obrigatorio}") String password, boolean admin) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		this.password = password;
-		this.admin = admin;
-	}
-
-	public Usuario() {
-		super();
-	}
-    
-    
-    
-    
-    
-    
 
 }

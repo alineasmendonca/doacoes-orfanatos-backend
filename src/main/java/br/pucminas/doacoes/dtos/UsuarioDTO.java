@@ -1,11 +1,17 @@
 package br.pucminas.doacoes.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotEmpty;
 
+import br.pucminas.doacoes.domain.Categoria;
+
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class UsuarioDTO {
 
@@ -26,22 +32,5 @@ public class UsuarioDTO {
     private boolean admin;
 
     private String password;
-
-	public UsuarioDTO(Integer id, @NotEmpty(message = "{campo.usuario.obrigatorio}") String username,
-			@NotEmpty(message = "{campo.nome.obrigatorio}") String name,
-			@NotEmpty(message = "{campo.telefone.obrigatorio}") String phone,
-			@NotEmpty(message = "{campo.email.obrigatorio}") String email, boolean admin, String password) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		this.admin = admin;
-		this.password = password;
-	}
-    
-    
-    
 
 }

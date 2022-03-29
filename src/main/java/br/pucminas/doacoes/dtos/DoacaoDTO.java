@@ -14,7 +14,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.pucminas.doacoes.domain.Categoria;
 import br.pucminas.doacoes.domain.Doacao;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class DoacaoDTO implements Serializable{
 
 	/**
@@ -53,7 +59,7 @@ public class DoacaoDTO implements Serializable{
 	}
 
 
-	public Integer getId() {
+	/*public Integer getId() {
 		return id;
 	}
 
@@ -145,7 +151,7 @@ public class DoacaoDTO implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
+	}*/
 
 
 	

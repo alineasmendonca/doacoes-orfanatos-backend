@@ -15,6 +15,13 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Categoria implements Serializable{
 	/**
@@ -36,19 +43,6 @@ public class Categoria implements Serializable{
 	@OneToMany(mappedBy = "categoria")
 	private List<Doacao> doacoes = new ArrayList<Doacao>();
 	
-	public Categoria() {
-		super();
-	}
-	public Categoria(Integer id, String nome, String descricao, List<Doacao> doacoes) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.doacoes = doacoes;
-		
-		
-	}
-	
 	public Categoria(Integer id, String nome, String descricao) {
 		super();
 		this.id = id;
@@ -56,35 +50,11 @@ public class Categoria implements Serializable{
 		this.descricao = descricao;
 	}
 	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	
-	public List<Doacao> getDoacoes() {
-		return doacoes;
-	}
-	public void setDoacoes(List<Doacao> doacoes) {
-		this.doacoes = doacoes;
-	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
