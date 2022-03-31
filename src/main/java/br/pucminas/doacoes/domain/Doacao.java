@@ -38,7 +38,7 @@ public class Doacao implements Serializable{
 	private Integer quantidade;
 	
 	@NotEmpty(message = "O Campo DESCRIÇÃO é obrigatório")
-	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 200 caracteres")
+	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 250 caracteres")
 	private String descricao;
 	
 	@JsonIgnore

@@ -4,8 +4,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import br.pucminas.doacoes.domain.Categoria;
 import br.pucminas.doacoes.domain.Doacao;
@@ -22,10 +25,18 @@ public class DoacaoService {
 	@Autowired
 	private CategoriaService categoriaService;
 	
-	public Doacao findById(Integer id) {
+	/*public Doacao findById(Integer id) {
 		Optional<Doacao> obj = repository.findById(id);
+		
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id:" + id + ", Tipo: " + Doacao.class.getName()));
-	}
+	}*/
+	
+	public Doacao findById(Integer id) throws Exception {
+        var doacaoOpt = repository.findById(id);
+
+        return doacaoOpt
+            .orElseThrow(() -> new Exception());
+    }
 	
 	public List<Doacao> findAll(){
 		return repository.findAll();
@@ -36,7 +47,7 @@ public class DoacaoService {
 		return repository.save(obj);
 	}
 
-	public Doacao update(Integer id, Doacao obj) {
+	public Doacao update(Integer id, Doacao obj) throws Exception {
 		Doacao newObj = findById(id);
 		updateData(newObj, obj);
 		return repository.save(newObj);
@@ -54,7 +65,7 @@ public class DoacaoService {
 		
 	}
 
-	public void delete(Integer id) {
+	public void delete(Integer id) throws Exception {
 		findById(id);
 		repository.deleteById(id);	
 //		try {
@@ -76,6 +87,59 @@ public class DoacaoService {
 		obj.setCategoria(cat);
 		return repository.save(obj);
 	}
+	
+	public List<Doacao> findByFiltros(String descricao, Integer quantidade, Integer idCategoria) {
+
+        List<Doacao> lista = null;
+
+        if (!StringUtils.hasText(descricao) && quantidade == null && idCategoria == null) {
+            lista = repository.findAll();
+        } else {
+            descricao = StringUtils.hasText(descricao) ? descricao.toLowerCase() : null;
+            System.out.println("Descrição:" + descricao);
+            System.out.println("Quantidade:" + quantidade);
+            lista = repository.findByFiltros(descricao, quantidade, idCategoria);
+            // lista = repository.findByFiltros(descricao);
+        }
+        return lista;
+    }
+	
+	@Transactional
+    public Doacao insert(DoacaoDTO doacaoDto) throws Exception {
+        verificarExistencia(null, doacaoDto);
+
+        var doacao = new Doacao();
+
+        complementarDados(doacao, doacaoDto);
+
+        repository.save(doacao);
+
+        return doacao;
+    }
+	
+	private Doacao complementarDados(Doacao doacao, DoacaoDTO doacaoDto) {
+		var categoria = categoriaService.findById(doacaoDto.getIdCategoria());
+		
+		doacao.setCategoria(categoria);
+		doacao.setDescricao(doacaoDto.getDescricao());
+		doacao.setQuantidade(doacaoDto.getQuantidade());
+
+        return doacao;
+    }
+
+	
+	private void verificarExistencia(Integer idDoacaoAlterada, DoacaoDTO objDto) throws Exception {
+        var doacao = repository.findByDescricaoIgnoreCase(objDto.getDescricao());
+        if (doacao != null
+            && jaExiste(idDoacaoAlterada, doacao.getId())) {
+            throw new Exception("Doação já cadastrada");
+        }
+    }
+	
+	public static boolean jaExiste(Integer idEntidadeAlterada, Integer idRecuperadoBanco) {
+        return idEntidadeAlterada == null || !idRecuperadoBanco.equals(idEntidadeAlterada);
+    }
+	
 
 	
 	/*public Doacao create(Integer categoria_id, DoacaoDTO objDto) {

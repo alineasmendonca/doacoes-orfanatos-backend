@@ -34,8 +34,11 @@ public class DoacaoDTO implements Serializable{
 	private Integer quantidade;
 	
 	@NotEmpty(message = "O Campo DESCRIÇÃO é obrigatório")
-	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 200 caracteres")
+	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 250 caracteres")
 	private String descricao;
+	
+	@NotNull(message = "Categoria deve ser preenchida.")
+    private Integer idCategoria;
 	
 	private Categoria categoria;
 	private Date dataCadastro;
@@ -53,6 +56,9 @@ public class DoacaoDTO implements Serializable{
 		this.dataAutorizacao = obj.getDataAutorizacao();
 		this.dataCadastro = obj.getDataCadastro();
 		this.dataLiberacao = obj.getDataLiberacao();
+		if(obj.getCategoria() != null) {
+			this.idCategoria = obj.getCategoria().getId();	
+		}
 		this.categoria = obj.getCategoria();
 		this.idDoador = obj.getIdDoador();
 		this.idOrfanatoContemplado = obj.getIdOrfanatoContemplado();
