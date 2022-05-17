@@ -46,6 +46,7 @@ public class OrfanatoService {
 		newObj.setHistoria(obj.getHistoria());
 		newObj.setNome(obj.getNome());
 		newObj.setQuantidadeCriancas(obj.getQuantidadeCriancas());
+		newObj.setTelefone(obj.getTelefone());
 		
 	}
 
