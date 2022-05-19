@@ -1,22 +1,21 @@
 package br.pucminas.doacoes.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.pucminas.doacoes.domain.Usuario;
 import br.pucminas.doacoes.dtos.UsuarioDTO;
 import br.pucminas.doacoes.repositories.UsuarioRepository;
 import br.pucminas.doacoes.resources.exceptions.RegisteredUserException;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioService implements UserDetailsService {
@@ -103,4 +102,20 @@ public class UsuarioService implements UserDetailsService {
 
         this.repository.save(appUser);
     }
+    
+    public List<Usuario> findByFiltros(String nome, String email, Integer perfil) {
+
+        List<Usuario> lista = null;
+
+        if (!StringUtils.hasText(nome) && perfil == null && !StringUtils.hasText(email)) {
+            lista = repository.findAll();
+        } else {
+            nome = StringUtils.hasText(nome) ? nome.toLowerCase() : null;
+            email = StringUtils.hasText(email) ? email.toLowerCase() : null;
+            lista = repository.findByFiltros(nome, email, perfil);
+        }
+        return lista;
+    }
+    
+    
 }

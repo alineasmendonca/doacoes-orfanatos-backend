@@ -1,17 +1,29 @@
 package br.pucminas.doacoes.resources;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.pucminas.doacoes.domain.Usuario;
 import br.pucminas.doacoes.dtos.UsuarioDTO;
 import br.pucminas.doacoes.resources.exceptions.RegisteredUserException;
 import br.pucminas.doacoes.services.UsuarioService;
-
-import javax.validation.Valid;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -31,10 +43,10 @@ public class UsuarioResource {
         }
     }
 
-    @GetMapping
+    /*@GetMapping
     public List<Usuario> getAll(){
         return service.findAllOrderByUsernameAsc();
-    }
+    }*/
 
     @GetMapping("{id}")
     public UsuarioDTO findById(@PathVariable Integer id){
@@ -95,5 +107,15 @@ public class UsuarioResource {
         System.out.println(updatedAppUserDTO);
         this.service.update(updatedAppUserDTO);
     }
+    
+    @GetMapping
+	public ResponseEntity<List<UsuarioDTO>> findByFiltros(@RequestParam(value = "nome", required = false) String nome,
+			@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "perfil", required = false) Integer perfil) {
+		List<Usuario> lista = service.findByFiltros(nome, email, perfil);
+		List<UsuarioDTO> listaDTO = lista.stream().map(UsuarioDTO::new).collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listaDTO);
+	}
 
 }
