@@ -10,10 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import br.pucminas.doacoes.services.UsuarioService;
 
+@SuppressWarnings("deprecation")
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -68,8 +68,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and().exceptionHandling().accessDeniedPage("/accessdenied");*/
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
-    }
+   @Bean
+   public PasswordEncoder passwordEncoder(){
+       return NoOpPasswordEncoder.getInstance();
+   }
+    
+   
+    /*@Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }*/
+    
 }

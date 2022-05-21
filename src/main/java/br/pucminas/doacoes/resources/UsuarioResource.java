@@ -35,7 +35,7 @@ public class UsuarioResource {
 
     private final UsuarioService service;
     
-    @PostMapping
+    /*@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid Usuario appUser){
     	System.out.println(appUser);
@@ -44,9 +44,10 @@ public class UsuarioResource {
         } catch (RegisteredUserException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
-    }
+    }*/
 
-    /*@PostMapping
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Usuario> insert(@Validated @RequestBody UsuarioDTO objDto) throws Exception {
     	if(objDto.getOrfanato() == null) {
     		objDto.setOrfanato(new Orfanato());
@@ -61,7 +62,7 @@ public class UsuarioResource {
             .toUri();
 
         return ResponseEntity.created(uri).build();
-    }*/
+    }
 
     /*@GetMapping
     public List<Usuario> getAll(){
