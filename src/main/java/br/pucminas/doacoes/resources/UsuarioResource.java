@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -19,18 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.pucminas.doacoes.domain.Doacao;
 import br.pucminas.doacoes.domain.Orfanato;
 import br.pucminas.doacoes.domain.Usuario;
-import br.pucminas.doacoes.dtos.DoacaoDTO;
-import br.pucminas.doacoes.dtos.OrfanatoDTO;
 import br.pucminas.doacoes.dtos.UsuarioDTO;
-import br.pucminas.doacoes.resources.exceptions.RegisteredUserException;
-import br.pucminas.doacoes.services.CategoriaService;
-import br.pucminas.doacoes.services.OrfanatoService;
 import br.pucminas.doacoes.services.UsuarioService;
 import lombok.RequiredArgsConstructor;
 
@@ -40,9 +32,6 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioResource {
 
     private final UsuarioService service;
-    
-    @Autowired
-	private OrfanatoService orfanatoService;
 
     @PostMapping
     public ResponseEntity<Usuario> insert(@Validated @RequestBody UsuarioDTO objDto) throws Exception {

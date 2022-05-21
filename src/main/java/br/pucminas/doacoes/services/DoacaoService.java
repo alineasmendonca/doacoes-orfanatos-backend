@@ -1,8 +1,6 @@
 package br.pucminas.doacoes.services;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -14,7 +12,6 @@ import br.pucminas.doacoes.domain.Categoria;
 import br.pucminas.doacoes.domain.Doacao;
 import br.pucminas.doacoes.dtos.DoacaoDTO;
 import br.pucminas.doacoes.repositories.DoacaoRepository;
-import br.pucminas.doacoes.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class DoacaoService {
