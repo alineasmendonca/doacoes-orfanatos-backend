@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.pucminas.doacoes.domain.Orfanato;
 import br.pucminas.doacoes.domain.Usuario;
 import br.pucminas.doacoes.dtos.UsuarioDTO;
+import br.pucminas.doacoes.resources.exceptions.RegisteredUserException;
 import br.pucminas.doacoes.services.UsuarioService;
 import lombok.RequiredArgsConstructor;
 
@@ -32,8 +34,19 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioResource {
 
     private final UsuarioService service;
-
+    
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void save(@RequestBody @Valid Usuario appUser){
+    	System.out.println(appUser);
+        try {
+            service.save(appUser);
+        } catch (RegisteredUserException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    /*@PostMapping
     public ResponseEntity<Usuario> insert(@Validated @RequestBody UsuarioDTO objDto) throws Exception {
     	if(objDto.getOrfanato() == null) {
     		objDto.setOrfanato(new Orfanato());
@@ -48,7 +61,7 @@ public class UsuarioResource {
             .toUri();
 
         return ResponseEntity.created(uri).build();
-    }
+    }*/
 
     /*@GetMapping
     public List<Usuario> getAll(){

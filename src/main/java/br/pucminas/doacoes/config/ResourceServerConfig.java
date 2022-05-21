@@ -18,11 +18,19 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/api/accounts/**", "/api/projects/**", "/api/dailyRecords/**",
                         "/api/records/**", "/api/app-users/**").authenticated()
                 .anyRequest().denyAll();*/
-    	http
+    	/*http
         .authorizeRequests()
         .antMatchers("/usuarios/**", "/orfanatos/**").permitAll()
         .antMatchers("/categorias/**", "/doacoes/**",
-                "/contas/**"/*, "/orfanatos/**"*/).authenticated()
+                "/contas/**").authenticated()
+        .anyRequest().denyAll();*/
+    	
+    	
+    	http
+        .authorizeRequests()
+        .antMatchers("/usuarios/**").permitAll()
+        .antMatchers("/categorias/**", "/doacoes/**",
+                "/contas/**", "/orfanatos/**").authenticated()
         .anyRequest().denyAll();
     }
 }
