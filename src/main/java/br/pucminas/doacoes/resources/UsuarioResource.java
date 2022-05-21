@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,8 +24,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.pucminas.doacoes.domain.Orfanato;
 import br.pucminas.doacoes.domain.Usuario;
+import br.pucminas.doacoes.dtos.OrfanatoDTO;
 import br.pucminas.doacoes.dtos.UsuarioDTO;
 import br.pucminas.doacoes.resources.exceptions.RegisteredUserException;
+import br.pucminas.doacoes.services.OrfanatoService;
 import br.pucminas.doacoes.services.UsuarioService;
 import lombok.RequiredArgsConstructor;
 
@@ -34,6 +37,8 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioResource {
 
     private final UsuarioService service;
+    
+    private final OrfanatoService orfanatoService;
     
     /*@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -135,6 +140,17 @@ public class UsuarioResource {
 			@RequestParam(value = "perfil", required = false) Integer perfil) {
 		List<Usuario> lista = service.findByFiltros(nome, email, perfil);
 		List<UsuarioDTO> listaDTO = lista.stream().map(UsuarioDTO::new).collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listaDTO);
+	}
+    
+    @GetMapping("/orfanatos")
+	public ResponseEntity<List<OrfanatoDTO>> findByFiltros(@RequestParam(value = "nome", required = false) String nome,
+			@RequestParam(value = "quantidadeCriancas", required = false) Integer quantidadeCriancas,
+			@RequestParam(value = "historia", required = false) String historia,
+			@RequestParam(value = "endereco", required = false) String endereco) {
+		List<Orfanato> lista = orfanatoService.findByFiltros(nome, quantidadeCriancas, historia, endereco);
+		List<OrfanatoDTO> listaDTO = lista.stream().map(OrfanatoDTO::new).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(listaDTO);
 	}
