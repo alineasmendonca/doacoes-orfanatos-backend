@@ -12,6 +12,7 @@ import br.pucminas.doacoes.domain.Doacao;
 import br.pucminas.doacoes.domain.Usuario;
 import br.pucminas.doacoes.repositories.CategoriaRepository;
 import br.pucminas.doacoes.repositories.DoacaoRepository;
+import br.pucminas.doacoes.repositories.OrfanatoRepository;
 import br.pucminas.doacoes.repositories.UsuarioRepository;
 
 @Service
@@ -24,6 +25,9 @@ public class DBService {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private OrfanatoRepository orfanatoRepository;
 
 	public void instanciaBaseDeDados(){
 		Categoria cat1 = new Categoria(null, "Alimento", "Categoria de Alimentos");

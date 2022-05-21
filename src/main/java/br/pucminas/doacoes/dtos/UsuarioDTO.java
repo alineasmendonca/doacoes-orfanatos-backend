@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import br.pucminas.doacoes.domain.Categoria;
+import br.pucminas.doacoes.domain.Orfanato;
 import br.pucminas.doacoes.domain.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,6 +49,10 @@ public class UsuarioDTO implements Serializable {
     @NotNull(message = "O Campo QUANTIDADE é obrigatório")
     private Integer perfil;
     
+    private Integer idOrfanato;
+    
+    private Orfanato orfanato;
+    
     public UsuarioDTO(Usuario obj) {
 		super();
 		this.id = obj.getId();
@@ -59,6 +65,10 @@ public class UsuarioDTO implements Serializable {
 		this.telefoneFixo = obj.getTelefoneFixo();
 		this.endereco = obj.getEndereco();
 		this.perfil = obj.getPerfil();
+		if(obj.getOrfanato() != null) {
+			this.idOrfanato = obj.getOrfanato().getId();	
+		}
+		this.orfanato = obj.getOrfanato();
 	}
 	
 

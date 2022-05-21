@@ -3,6 +3,8 @@ package br.pucminas.doacoes.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.pucminas.doacoes.domain.Orfanato;
 import br.pucminas.doacoes.domain.Usuario;
 import br.pucminas.doacoes.dtos.UsuarioDTO;
 import br.pucminas.doacoes.repositories.UsuarioRepository;
@@ -22,6 +25,9 @@ public class UsuarioService implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository repository;
+    
+    @Autowired
+	private OrfanatoService orfanatoService;
 
     public void createUserAdmin(){
 
@@ -115,6 +121,57 @@ public class UsuarioService implements UserDetailsService {
             lista = repository.findByFiltros(nome, email, perfil);
         }
         return lista;
+    }
+    
+    @Transactional
+    public Usuario insert(UsuarioDTO usuarioDto) throws Exception {
+        verificarExistencia(null, usuarioDto);
+
+        var usuario = new Usuario();
+
+        complementarDados(usuario, usuarioDto);
+
+        repository.save(usuario);
+
+        return usuario;
+    }
+    
+    private Usuario complementarDados(Usuario usuario, UsuarioDTO usuarioDto) {
+		Orfanato orfanato = null;
+		try {
+			if(usuarioDto.getIdOrfanato() != null) {
+				orfanato = orfanatoService.findById(usuarioDto.getIdOrfanato());	
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		usuario.setAdmin(usuarioDto.isAdmin());
+		usuario.setEmail(usuarioDto.getEmail());
+		usuario.setEndereco(usuarioDto.getEndereco());
+		usuario.setNome(usuarioDto.getNome());
+		usuario.setPerfil(usuarioDto.getPerfil());
+		usuario.setSenha(usuarioDto.getSenha());
+		usuario.setTelefoneCelular(usuarioDto.getTelefoneCelular());
+		usuario.setTelefoneFixo(usuarioDto.getTelefoneFixo());
+		usuario.setUsername(usuarioDto.getUsername());
+		usuario.setOrfanato(orfanato);
+	
+
+        return usuario;
+    }
+    
+    private void verificarExistencia(Integer idUsuarioAlterado, UsuarioDTO objDto) throws Exception {
+        var usuario = repository.findByUsernameIgnoreCase(objDto.getUsername());
+        if (usuario != null
+            && jaExiste(idUsuarioAlterado, usuario.getId())) {
+            throw new Exception("Doação já cadastrada");
+        }
+    }
+    
+    public static boolean jaExiste(Integer idEntidadeAlterada, Integer idRecuperadoBanco) {
+        return idEntidadeAlterada == null || !idRecuperadoBanco.equals(idEntidadeAlterada);
     }
     
     

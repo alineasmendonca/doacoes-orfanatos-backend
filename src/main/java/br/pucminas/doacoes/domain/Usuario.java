@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -79,5 +81,10 @@ public class Usuario {
     @Column
     @NotNull(message = "O Campo PERFIL é obrigatório")
     private Integer perfil;
+    
+    @JsonIgnore
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="orfanato_id", nullable = true)
+	private Orfanato orfanato;
 
 }

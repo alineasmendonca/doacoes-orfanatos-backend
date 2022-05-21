@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.pucminas.doacoes.domain.Doacao;
 import br.pucminas.doacoes.domain.Orfanato;
 import br.pucminas.doacoes.domain.Usuario;
 
@@ -33,4 +34,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 	List<Usuario> findByFiltros(@Param("nome") String nome, @Param("email") String email, @Param("perfil") Integer perfil);
 	
 	Orfanato findByNomeIgnoreCase(String nome);
+	
+	Usuario findByUsernameIgnoreCase(String username);
 }
