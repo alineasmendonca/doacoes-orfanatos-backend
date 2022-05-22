@@ -109,16 +109,17 @@ public class UsuarioService implements UserDetailsService {
         this.repository.save(appUser);
     }
     
-    public List<Usuario> findByFiltros(String nome, String email, Integer perfil) {
+    public List<Usuario> findByFiltros(String nome, String email, Integer perfil, String username) {
 
         List<Usuario> lista = null;
 
-        if (!StringUtils.hasText(nome) && perfil == null && !StringUtils.hasText(email)) {
+        if (!StringUtils.hasText(nome) && perfil == null && !StringUtils.hasText(email) && !StringUtils.hasText(username)) {
             lista = repository.findAll();
         } else {
             nome = StringUtils.hasText(nome) ? nome.toLowerCase() : null;
             email = StringUtils.hasText(email) ? email.toLowerCase() : null;
-            lista = repository.findByFiltros(nome, email, perfil);
+            username = StringUtils.hasText(username) ? username.toLowerCase() : null;
+            lista = repository.findByFiltros(nome, email, perfil, username);
         }
         return lista;
     }

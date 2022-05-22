@@ -137,8 +137,9 @@ public class UsuarioResource {
     @GetMapping
 	public ResponseEntity<List<UsuarioDTO>> findByFiltros(@RequestParam(value = "nome", required = false) String nome,
 			@RequestParam(value = "email", required = false) String email,
-			@RequestParam(value = "perfil", required = false) Integer perfil) {
-		List<Usuario> lista = service.findByFiltros(nome, email, perfil);
+			@RequestParam(value = "perfil", required = false) Integer perfil,
+			@RequestParam(value = "username", required = false) String username) {
+		List<Usuario> lista = service.findByFiltros(nome, email, perfil, username);
 		List<UsuarioDTO> listaDTO = lista.stream().map(UsuarioDTO::new).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(listaDTO);

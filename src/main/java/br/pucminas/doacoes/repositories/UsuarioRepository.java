@@ -29,9 +29,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Query("select u from Usuario u where (:nome is null or lower(u.nome) like %:nome%) "
 			+ " and (:perfil is null or u.perfil = :perfil) "
 			+ " and (:email is null or lower(u.email) like %:email%) "
+			+ " and (:username is null or u.username = :username) "
 			+ " order by lower(u.nome)")
 	@Transactional(readOnly = true)
-	List<Usuario> findByFiltros(@Param("nome") String nome, @Param("email") String email, @Param("perfil") Integer perfil);
+	List<Usuario> findByFiltros(@Param("nome") String nome, @Param("email") String email, @Param("perfil") Integer perfil, @Param("username") String username);
 	
 	Orfanato findByNomeIgnoreCase(String nome);
 	
