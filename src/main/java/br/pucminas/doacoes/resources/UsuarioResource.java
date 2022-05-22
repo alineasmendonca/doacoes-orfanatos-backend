@@ -80,14 +80,22 @@ public class UsuarioResource {
                 .findById(id);
 
     	UsuarioDTO appUserDTO = new UsuarioDTO();
-        appUserDTO.setId(appUser.getId());
-        appUserDTO.setUsername(appUser.getUsername());
-        appUserDTO.setNome(appUser.getNome());
-        appUserDTO.setEmail(appUser.getEmail());
+        
         appUserDTO.setAdmin(appUser.isAdmin());
-        appUserDTO.setTelefoneCelular(appUser.getTelefoneCelular());
+        appUserDTO.setEmail(appUser.getEmail());
+        appUserDTO.setEndereco(appUser.getEndereco());
+        appUserDTO.setId(appUser.getId());
+        if(appUser.getOrfanato() != null) {
+        	appUserDTO.setIdOrfanato(appUser.getOrfanato().getId());	
+        }
+        appUserDTO.setNome(appUser.getNome());
+        appUserDTO.setOrfanato(appUser.getOrfanato());
+        appUserDTO.setPerfil(appUser.getPerfil());
         appUserDTO.setSenha(appUser.getSenha());
-
+        appUserDTO.setTelefoneCelular(appUser.getTelefoneCelular());
+        appUserDTO.setTelefoneFixo(appUser.getTelefoneFixo());
+        appUserDTO.setUsername(appUser.getUsername());
+        
         System.out.println("Usuário: ");
         System.out.println(appUserDTO);
         return appUserDTO;
