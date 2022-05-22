@@ -129,11 +129,17 @@ public class UsuarioResource {
         return appUser.isAdmin();
     }
 
-    @DeleteMapping("{username}")
+    /*@DeleteMapping("{username}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete (@PathVariable String username) {
         this.service.delete(username);
-    }
+    }*/
+    
+    @DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Integer id) throws Exception{
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 
     @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)

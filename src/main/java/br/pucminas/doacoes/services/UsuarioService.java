@@ -175,5 +175,10 @@ public class UsuarioService implements UserDetailsService {
         return idEntidadeAlterada == null || !idRecuperadoBanco.equals(idEntidadeAlterada);
     }
     
+    public void delete(Integer id) throws Exception {
+		findById(id);
+		repository.deleteById(id);	
+	}
+    
     
 }
