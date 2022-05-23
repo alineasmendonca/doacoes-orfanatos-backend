@@ -120,6 +120,7 @@ public class DoacaoService {
 	private Doacao complementarDados(Doacao doacao, DoacaoDTO doacaoDto) {
 		var categoria = categoriaService.findById(doacaoDto.getIdCategoria());
 		
+		doacao.setIdCategoria(categoria.getId());
 		doacao.setCategoria(categoria);
 		doacao.setDescricao(doacaoDto.getDescricao());
 		doacao.setQuantidade(doacaoDto.getQuantidade());
