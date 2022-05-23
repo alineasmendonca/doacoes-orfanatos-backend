@@ -1,6 +1,7 @@
 package br.pucminas.doacoes.dtos;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.JoinColumn;
@@ -40,8 +41,14 @@ public class DoacaoDTO implements Serializable{
 	@NotNull(message = "Categoria deve ser preenchida.")
     private Integer idCategoria;
 	
+	@NotEmpty(message = "O Campo ENDEREÇO RETIRADA é obrigatório")
+	@Length(min = 3, max = 250, message = "O Campo ENDEREÇO RETIRADA deve ter entre 3 e 250 caracteres")
+	private String localRetirada;
+	
 	private Categoria categoria;
-	private Date dataCadastro;
+	
+	private LocalDateTime dataCadastro;
+	
 	private Date dataLiberacao;
 	private Date dataAutorizacao;
 	private Integer idDoador;
@@ -62,5 +69,6 @@ public class DoacaoDTO implements Serializable{
 		this.categoria = obj.getCategoria();
 		this.idDoador = obj.getIdDoador();
 		this.idOrfanatoContemplado = obj.getIdOrfanatoContemplado();
+		this.localRetirada = obj.getLocalRetirada();
 	}
 }

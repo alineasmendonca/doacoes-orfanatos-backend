@@ -117,9 +117,10 @@ public class DoacaoResource {
 	
 	@GetMapping
 	public ResponseEntity<List<DoacaoDTO>> findByFiltros(@RequestParam(value = "descricao", required = false) String descricao,
+			@RequestParam(value = "localRetirada", required = false) String localRetirada,
 			@RequestParam(value = "quantidade", required = false) Integer quantidade,
 			@RequestParam(value = "idCategoria", required = false) Integer idCategoria) {
-		List<Doacao> lista = service.findByFiltros(descricao, quantidade, idCategoria);
+		List<Doacao> lista = service.findByFiltros(descricao, localRetirada, quantidade, idCategoria);
 		List<DoacaoDTO> listaDTO = lista.stream().map(DoacaoDTO::new).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(listaDTO);

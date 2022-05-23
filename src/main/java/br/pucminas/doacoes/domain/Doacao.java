@@ -1,6 +1,7 @@
 package br.pucminas.doacoes.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -46,7 +47,12 @@ public class Doacao implements Serializable{
 	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
 	
-	private Date dataCadastro;
+	@NotEmpty(message = "O Campo ENDEREÇO RETIRADA é obrigatório")
+	@Length(min = 3, max = 250, message = "O Campo ENDEREÇO RETIRADA deve ter entre 3 e 250 caracteres")
+	private String localRetirada;
+	
+	private LocalDateTime dataCadastro;
+	
 	private Date dataLiberacao;
 	private Date dataAutorizacao;
 	private Integer idDoador;

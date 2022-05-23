@@ -17,11 +17,12 @@ public interface DoacaoRepository extends JpaRepository<Doacao, Integer> {
 	List<Doacao> findAllByCategoria(@Param(value="categoria_id")Integer categoria_id);
 	
 	@Query("select d from Doacao d where (:descricao is null or lower(d.descricao) like %:descricao%) "
+			+ " and (:localRetirada is null or lower(d.localRetirada) like %:localRetirada%) "
 			+ " and (:quantidade is null or d.quantidade = :quantidade) "
 			+ " and (:idCategoria is null or d.categoria.id = :idCategoria) "
 	        + " order by lower(d.descricao)")
 	@Transactional(readOnly = true)
-	List<Doacao> findByFiltros(@Param("descricao") String descricao, @Param("quantidade") Integer quantidade, @Param("idCategoria") Integer idCategoria);
+	List<Doacao> findByFiltros(@Param("descricao") String descricao, @Param("localRetirada") String localRetirada, @Param("quantidade") Integer quantidade, @Param("idCategoria") Integer idCategoria);
 	
 	Doacao findByDescricaoIgnoreCase(String descricao);
 

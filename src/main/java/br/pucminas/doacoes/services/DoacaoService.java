@@ -1,5 +1,6 @@
 package br.pucminas.doacoes.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -85,17 +86,16 @@ public class DoacaoService {
 		return repository.save(obj);
 	}
 	
-	public List<Doacao> findByFiltros(String descricao, Integer quantidade, Integer idCategoria) {
+	public List<Doacao> findByFiltros(String descricao, String localRetirada, Integer quantidade, Integer idCategoria) {
 
         List<Doacao> lista = null;
 
-        if (!StringUtils.hasText(descricao) && quantidade == null && idCategoria == null) {
+        if (!StringUtils.hasText(descricao) && !StringUtils.hasText(localRetirada) && quantidade == null && idCategoria == null) {
             lista = repository.findAll();
         } else {
             descricao = StringUtils.hasText(descricao) ? descricao.toLowerCase() : null;
-            System.out.println("Descrição:" + descricao);
-            System.out.println("Quantidade:" + quantidade);
-            lista = repository.findByFiltros(descricao, quantidade, idCategoria);
+            localRetirada = StringUtils.hasText(localRetirada) ? localRetirada.toLowerCase() : null;
+            lista = repository.findByFiltros(descricao, localRetirada, quantidade, idCategoria);
             // lista = repository.findByFiltros(descricao);
         }
         return lista;
@@ -120,6 +120,8 @@ public class DoacaoService {
 		doacao.setCategoria(categoria);
 		doacao.setDescricao(doacaoDto.getDescricao());
 		doacao.setQuantidade(doacaoDto.getQuantidade());
+		doacao.setLocalRetirada(doacaoDto.getLocalRetirada());
+		doacao.setDataCadastro(LocalDateTime.now());
 
         return doacao;
     }
