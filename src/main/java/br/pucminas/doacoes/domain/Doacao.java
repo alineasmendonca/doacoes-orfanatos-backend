@@ -42,6 +42,9 @@ public class Doacao implements Serializable{
 	@Length(min = 3, max = 200, message = "O Campo DESCRIÇÃO deve ter entre 3 e 250 caracteres")
 	private String descricao;
 	
+	@NotNull(message = "Categoria deve ser preenchida.")
+    private Integer idCategoria;
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="categoria_id")

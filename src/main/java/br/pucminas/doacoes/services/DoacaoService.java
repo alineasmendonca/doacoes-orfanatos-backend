@@ -46,21 +46,24 @@ public class DoacaoService {
 	}
 
 	public Doacao update(Integer id, Doacao obj) throws Exception {
+		System.out.println("******************Dados para alteração:" + obj);
 		Doacao newObj = findById(id);
 		updateData(newObj, obj);
 		return repository.save(newObj);
 	}
 
 	private void updateData(Doacao newObj, Doacao obj) {
-		newObj.setCategoria(obj.getCategoria());
+		var categoria = categoriaService.findById(obj.getIdCategoria());
+		
+		newObj.setIdCategoria(obj.getIdCategoria());
+		newObj.setCategoria(categoria);
 		newObj.setQuantidade(obj.getQuantidade());
 		newObj.setDescricao(obj.getDescricao());
 		newObj.setDataAutorizacao(obj.getDataAutorizacao());
 		newObj.setDataLiberacao(obj.getDataLiberacao());
-		newObj.setDataCadastro(obj.getDataCadastro());
 		newObj.setIdDoador(obj.getIdDoador());
 		newObj.setIdOrfanatoContemplado(obj.getIdOrfanatoContemplado());
-		
+		newObj.setLocalRetirada(obj.getLocalRetirada());
 	}
 
 	public void delete(Integer id) throws Exception {
