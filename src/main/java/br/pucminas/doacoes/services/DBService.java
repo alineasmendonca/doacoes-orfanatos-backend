@@ -36,11 +36,11 @@ public class DBService {
 		Categoria cat4 = new Categoria(null, "Utensílios", "Categoria de Utensílios");
 		Categoria cat5 = new Categoria(null, "Material Escolar", "Categoria de Materiais Escolares");
 	
-        Doacao doacao1 = new Doacao(null, 2, "Lata de Leitem NAM 1", cat1, "Avenida Pontes Vieira 832", null, null, null, null, null);
-		Doacao doacao2 = new Doacao(null, 5, "Bodys tamanho RN", cat2, "Avenida Pontes Vieira 832", null, null, null, null, null);
-		Doacao doacao3 = new Doacao(null, 100, "Doação em dinheiro", cat3, "Avenida Pontes Vieira 832", null, null, null, null, null);
-		Doacao doacao4 = new Doacao(null, 3, "Mamadeiras", cat4, "Avenida Pontes Vieira 832", null, null, null, null, null);
-		Doacao doacao5 = new Doacao(null, 7, "Lápis", cat5, "Avenida Pontes Vieira 832", null, null, null, null, null);
+        Doacao doacao1 = new Doacao(null, 2, "Lata de Leitem NAM 1", null, cat1, "Avenida Pontes Vieira 832", null, null, null, null, null);
+		Doacao doacao2 = new Doacao(null, 5, "Bodys tamanho RN", null, cat2, "Avenida Pontes Vieira 832", null, null, null, null, null);
+		Doacao doacao3 = new Doacao(null, 100, "Doação em dinheiro", null, cat3, "Avenida Pontes Vieira 832", null, null, null, null, null);
+		Doacao doacao4 = new Doacao(null, 3, "Mamadeiras", null, cat4, "Avenida Pontes Vieira 832", null, null, null, null, null);
+		Doacao doacao5 = new Doacao(null, 7, "Lápis", null, cat5, "Avenida Pontes Vieira 832", null, null, null, null, null);
 		
 //		Usuario usuario1 = new Usuario(1, "aline", "Aline Alves da Silva Mendonça", "(85)999999999", "aline@gmail.com", "aline", true, "(85)999999999", "Avenida Pontes Vieira 100", 1);
 //		Usuario usuario2 = new Usuario(2, "administrador", "Usuário Administrador do Sistema", "(85)988888888", "administrador@gmail.com", "administrador", true, "(85)999999999",  "Avenida Pontes Vieira 200", 1);
