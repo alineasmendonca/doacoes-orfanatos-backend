@@ -89,16 +89,16 @@ public class DoacaoService {
 		return repository.save(obj);
 	}
 	
-	public List<Doacao> findByFiltros(String descricao, String localRetirada, Integer quantidade, Integer idCategoria) {
+	public List<Doacao> findByFiltros(String descricao, String localRetirada, Integer quantidade, Integer idCategoria, Integer situacao) {
 
         List<Doacao> lista = null;
 
-        if (!StringUtils.hasText(descricao) && !StringUtils.hasText(localRetirada) && quantidade == null && idCategoria == null) {
+        if (!StringUtils.hasText(descricao) && !StringUtils.hasText(localRetirada) && quantidade == null && idCategoria == null && situacao == null) {
             lista = repository.findAll();
         } else {
             descricao = StringUtils.hasText(descricao) ? descricao.toLowerCase() : null;
             localRetirada = StringUtils.hasText(localRetirada) ? localRetirada.toLowerCase() : null;
-            lista = repository.findByFiltros(descricao, localRetirada, quantidade, idCategoria);
+            lista = repository.findByFiltros(descricao, localRetirada, quantidade, idCategoria, situacao);
             // lista = repository.findByFiltros(descricao);
         }
         return lista;
