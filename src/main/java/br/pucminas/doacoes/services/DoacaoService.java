@@ -24,6 +24,9 @@ public class DoacaoService {
 	@Autowired
 	private CategoriaService categoriaService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	/*public Doacao findById(Integer id) {
 		Optional<Doacao> obj = repository.findById(id);
 		
@@ -61,7 +64,7 @@ public class DoacaoService {
 		newObj.setDescricao(obj.getDescricao());
 		newObj.setDataAutorizacao(obj.getDataAutorizacao());
 		newObj.setDataLiberacao(obj.getDataLiberacao());
-		newObj.setIdDoador(obj.getIdDoador());
+		// newObj.setIdDoador(obj.getIdDoador());
 		newObj.setIdOrfanatoContemplado(obj.getIdOrfanatoContemplado());
 		newObj.setLocalRetirada(obj.getLocalRetirada());
 	}
@@ -106,7 +109,7 @@ public class DoacaoService {
 	
 	@Transactional
     public Doacao insert(DoacaoDTO doacaoDto) throws Exception {
-        verificarExistencia(null, doacaoDto);
+        // verificarExistencia(null, doacaoDto);
 
         var doacao = new Doacao();
 
@@ -119,6 +122,7 @@ public class DoacaoService {
 	
 	private Doacao complementarDados(Doacao doacao, DoacaoDTO doacaoDto) {
 		var categoria = categoriaService.findById(doacaoDto.getIdCategoria());
+		var doador = usuarioService.findById(doacaoDto.getIdDoador());
 		
 		doacao.setIdCategoria(categoria.getId());
 		doacao.setCategoria(categoria);
@@ -127,6 +131,8 @@ public class DoacaoService {
 		doacao.setLocalRetirada(doacaoDto.getLocalRetirada());
 		doacao.setDataCadastro(LocalDateTime.now());
 		doacao.setSituacao(SituacaoDoacao.CRIADA.getCod());
+		
+		doacao.setDoador(doador);
 
         return doacao;
     }

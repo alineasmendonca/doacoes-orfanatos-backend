@@ -58,12 +58,17 @@ public class Doacao implements Serializable{
 	
 	private LocalDateTime dataLiberacao;
 	private LocalDateTime dataAutorizacao;
-	private Integer idDoador;
 	private Integer idOrfanatoContemplado;
 	
 	private Integer situacao;
 
-//	private Doador doador;
+	// private Integer idDoador;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="id_doador")
+    private Usuario doador;
+    
 //	private List<Orfanato> interessados = new ArrayList<Orfanato>();
 //	private Orfanato orfanatoContemplado;
 //	private Endereco localRetirada;
