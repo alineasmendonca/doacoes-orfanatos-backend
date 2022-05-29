@@ -43,8 +43,7 @@ public class UsuarioResource {
     /*@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid Usuario appUser){
-    	System.out.println(appUser);
-        try {
+    	try {
             service.save(appUser);
         } catch (RegisteredUserException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
@@ -57,8 +56,7 @@ public class UsuarioResource {
     	if(objDto.getOrfanato() == null) {
     		objDto.setOrfanato(new Orfanato());
     	}
-    	System.out.println("Usuário: " + objDto);
-        var tipo = service.insert(objDto);
+    	var tipo = service.insert(objDto);
 
         var uri = ServletUriComponentsBuilder
             .fromCurrentRequest()
@@ -96,8 +94,6 @@ public class UsuarioResource {
         appUserDTO.setTelefoneFixo(appUser.getTelefoneFixo());
         appUserDTO.setUsername(appUser.getUsername());
         
-        System.out.println("Usuário: ");
-        System.out.println(appUserDTO);
         return appUserDTO;
     }
 
@@ -116,8 +112,6 @@ public class UsuarioResource {
         appUserDTO.setTelefoneFixo(appUser.getTelefoneFixo());
         appUserDTO.setSenha(appUser.getSenha());
 
-        System.out.println("Usuário: ");
-        System.out.println(appUserDTO);
         return appUserDTO;
     }
 
@@ -144,7 +138,6 @@ public class UsuarioResource {
     @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update (@RequestBody @Valid UsuarioDTO updatedAppUserDTO) {
-        System.out.println(updatedAppUserDTO);
         this.service.update(updatedAppUserDTO);
     }
     

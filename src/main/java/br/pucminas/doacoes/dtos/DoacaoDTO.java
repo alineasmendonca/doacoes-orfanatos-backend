@@ -49,10 +49,12 @@ public class DoacaoDTO implements Serializable{
 	
 	private LocalDateTime dataCadastro;
 	
-	private Date dataLiberacao;
-	private Date dataAutorizacao;
+	private LocalDateTime dataLiberacao;
+	private LocalDateTime dataAutorizacao;
 	private Integer idDoador;
 	private Integer idOrfanatoContemplado;
+	
+	private Integer situacao;
 	
 	
 	public DoacaoDTO(Doacao obj) {
@@ -70,5 +72,6 @@ public class DoacaoDTO implements Serializable{
 		this.idDoador = obj.getIdDoador();
 		this.idOrfanatoContemplado = obj.getIdOrfanatoContemplado();
 		this.localRetirada = obj.getLocalRetirada();
+		this.situacao = obj.getSituacao();
 	}
 }

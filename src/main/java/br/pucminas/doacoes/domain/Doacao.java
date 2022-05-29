@@ -56,10 +56,12 @@ public class Doacao implements Serializable{
 	
 	private LocalDateTime dataCadastro;
 	
-	private Date dataLiberacao;
-	private Date dataAutorizacao;
+	private LocalDateTime dataLiberacao;
+	private LocalDateTime dataAutorizacao;
 	private Integer idDoador;
 	private Integer idOrfanatoContemplado;
+	
+	private Integer situacao;
 
 //	private Doador doador;
 //	private List<Orfanato> interessados = new ArrayList<Orfanato>();

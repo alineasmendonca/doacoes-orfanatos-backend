@@ -125,6 +125,20 @@ public class DoacaoResource {
 
 		return ResponseEntity.ok().body(listaDTO);
 	}
+	
+	@PutMapping(value = "/{id}/liberar")
+	public ResponseEntity<DoacaoDTO> liberar(@PathVariable Integer id, @Valid @RequestBody Doacao obj) throws Exception{
+		Doacao newObj = service.liberar(id, obj);
+		return ResponseEntity.ok().body(new DoacaoDTO(newObj));
+		
+	}
+	
+	@PutMapping(value = "/{id}/autorizar")
+	public ResponseEntity<DoacaoDTO> autorizar(@PathVariable Integer id, @Valid @RequestBody Doacao obj) throws Exception{
+		Doacao newObj = service.autorizar(id, obj);
+		return ResponseEntity.ok().body(new DoacaoDTO(newObj));
+		
+	}
 
 
 }

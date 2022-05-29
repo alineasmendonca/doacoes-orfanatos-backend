@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import br.pucminas.doacoes.domain.Categoria;
 import br.pucminas.doacoes.domain.Doacao;
 import br.pucminas.doacoes.dtos.DoacaoDTO;
+import br.pucminas.doacoes.enums.SituacaoDoacao;
 import br.pucminas.doacoes.repositories.DoacaoRepository;
 
 @Service
@@ -46,7 +47,6 @@ public class DoacaoService {
 	}
 
 	public Doacao update(Integer id, Doacao obj) throws Exception {
-		System.out.println("******************Dados para alteração:" + obj);
 		Doacao newObj = findById(id);
 		updateData(newObj, obj);
 		return repository.save(newObj);
@@ -126,6 +126,7 @@ public class DoacaoService {
 		doacao.setQuantidade(doacaoDto.getQuantidade());
 		doacao.setLocalRetirada(doacaoDto.getLocalRetirada());
 		doacao.setDataCadastro(LocalDateTime.now());
+		doacao.setSituacao(SituacaoDoacao.CRIADA.getCod());
 
         return doacao;
     }
@@ -142,6 +143,23 @@ public class DoacaoService {
 	public static boolean jaExiste(Integer idEntidadeAlterada, Integer idRecuperadoBanco) {
         return idEntidadeAlterada == null || !idRecuperadoBanco.equals(idEntidadeAlterada);
     }
+	
+	
+	public Doacao liberar(Integer id, Doacao obj) throws Exception {
+		Doacao newObj = findById(id);
+		// updateData(newObj, obj);
+		newObj.setSituacao(SituacaoDoacao.LIBERADA.getCod());
+		newObj.setDataLiberacao(LocalDateTime.now());
+		return repository.save(newObj);
+	}
+	
+	public Doacao autorizar(Integer id, Doacao obj) throws Exception {
+		Doacao newObj = findById(id);
+		// updateData(newObj, obj);
+		newObj.setSituacao(SituacaoDoacao.AUTORIZADA.getCod());
+		newObj.setDataAutorizacao(LocalDateTime.now());
+		return repository.save(newObj);
+	}
 	
 
 	
