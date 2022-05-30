@@ -100,6 +100,14 @@ public class OrfanatoResource {
 
 		return ResponseEntity.ok().body(listaDTO);
 	}
+	
+	@GetMapping("/interessados")
+	public ResponseEntity<List<OrfanatoDTO>> buscarOrfanatosInteressadosPorUmaDoacao(@RequestParam(value = "idDoacao", required = false) Integer idDoacao) {
+		List<Orfanato> lista = service.buscarOrfanatosInteressadosPorUmaDoacao(idDoacao);
+		List<OrfanatoDTO> listaDTO = lista.stream().map(OrfanatoDTO::new).collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listaDTO);
+	}
 
 
 }

@@ -21,6 +21,22 @@ public interface OrfanatoRepository extends JpaRepository<Orfanato, Integer> {
 	@Transactional(readOnly = true)
 	List<Orfanato> findByFiltros(@Param("nome") String nome, @Param("quantidadeCriancas") Integer quantidadeCriancas, @Param("historia") String historia, @Param("endereco") String endereco);
 	
+	/*@Query("select o from Orfanato o LEFT JOIN Interesse i where (i.idDoacao = :idDoacao) "
+			+ " and o.id = i.idOrfanatoInteressado")*/
+	@Query("SELECT o FROM Orfanato o LEFT JOIN Interesse i ON (o.id = i.idOrfanatoInteressado) "
+			+ " WHERE (i.idDoacao = :idDoacao)")
+	@Transactional(readOnly = true)
+	List<Orfanato> buscarOrfanatosInteressadosPorUmaDoacao(@Param("idDoacao") Integer idDoacao);
+
+	
 	Orfanato findByNomeIgnoreCase(String nome);
+	
+    /*@Query("select new br.gov.serpro.siseco.conformidade.arquivo.ArquivoConformidadeDemandaDTO( "
+            + "   a.id, a.nomeArquivoOriginal, a.nomeArquivoFisico, a.identificadorArquivo, a.tipo, "
+            + "   a.modeloConformidade.nome, u.id, u.nome, a.favorecido.id, a.favorecido.codigoFavorecido, a.favorecido.nome, "
+            + "   a.dataEnvio, a.dataEnvioConformidade, a.codigoReprocessamento, a.motivoFalhaReprocessamento) "
+            + "from ArquivoConformidade a "
+            + "   LEFT JOIN a.usuarioDesignado u "
+            + "where a.id = :idArquivo ")*/
 
 }

@@ -71,6 +71,18 @@ public class OrfanatoService {
         return lista;
     }
 	
+	public List<Orfanato> buscarOrfanatosInteressadosPorUmaDoacao(Integer idDoacao) {
+
+        List<Orfanato> lista = null;
+
+        if (idDoacao == null) {
+            lista = repository.findAll();
+        } else {
+            lista = repository.buscarOrfanatosInteressadosPorUmaDoacao(idDoacao);
+        }
+        return lista;
+    }
+	
 	@Transactional
     public Orfanato insert(OrfanatoDTO orfanatoDTO) throws Exception {
         verificarExistencia(null, orfanatoDTO);
