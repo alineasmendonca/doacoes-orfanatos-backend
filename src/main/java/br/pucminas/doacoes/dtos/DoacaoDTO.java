@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -39,6 +40,7 @@ public class DoacaoDTO implements Serializable{
 	private String descricao;
 	
 	@NotNull(message = "Categoria deve ser preenchida.")
+	@ColumnDefault("1")
     private Integer idCategoria;
 	
 	@NotEmpty(message = "O Campo ENDEREÇO RETIRADA é obrigatório")

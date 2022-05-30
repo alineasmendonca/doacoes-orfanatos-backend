@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -43,7 +44,7 @@ public class Doacao implements Serializable{
 	private String descricao;
 	
 	@NotNull(message = "Categoria deve ser preenchida.")
-    private Integer idCategoria;
+	private Integer idCategoria;
 	
 	@JsonIgnore
 	@ManyToOne

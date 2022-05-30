@@ -32,7 +32,7 @@ public class DoacaoService {
 		
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id:" + id + ", Tipo: " + Doacao.class.getName()));
 	}*/
-	
+
 	public Doacao findById(Integer id) throws Exception {
         var doacaoOpt = repository.findById(id);
 

@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.pucminas.doacoes.domain.Categoria;
 import br.pucminas.doacoes.domain.Doacao;
-import br.pucminas.doacoes.dtos.CategoriaDTO;
 import br.pucminas.doacoes.dtos.DoacaoDTO;
 import br.pucminas.doacoes.services.DoacaoService;
-
-import org.springframework.validation.annotation.Validated;
 
 @CrossOrigin("*")
 @RestController
@@ -37,35 +34,12 @@ public class DoacaoResource {
 	@Autowired
 	private DoacaoService service;
 	
-	/*@GetMapping(value = "/{id}")
-	public ResponseEntity<Doacao> findById(@PathVariable Integer id){
-		Doacao obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
-	}*/
-	
 	@GetMapping("/{id}")
     public ResponseEntity<DoacaoDTO> find(@PathVariable Integer id) throws Exception {
         Doacao doacao = service.findById(id);
 
         return ResponseEntity.ok(new DoacaoDTO(doacao));
     }
-	
-	
-	/*@GetMapping
-	public ResponseEntity<List<DoacaoDTO>> findAllByCategoria(@RequestParam(value="categoria", defaultValue = "0") Integer idCategoria){
-		List<Doacao> doacoes = service.findAllByCategoria(idCategoria);
-		List<DoacaoDTO> doacoesDto = doacoes.stream().map(obj -> new DoacaoDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(doacoesDto);
-	}*/
-	
-	// Antes
-	/*@PostMapping
-	public ResponseEntity<Doacao> create(@RequestParam(value = "categoria", defaultValue =  "0") Integer categoria_id, 
-			@RequestBody Doacao obj){
-		Doacao newObj = service.create(categoria_id, obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/doacoes/{id}").buildAndExpand(newObj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
-	}*/
 	
 	@PostMapping
     public ResponseEntity<Doacao> insert(@Validated @RequestBody DoacaoDTO objDto) throws Exception {
