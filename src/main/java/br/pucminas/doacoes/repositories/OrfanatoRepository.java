@@ -27,6 +27,12 @@ public interface OrfanatoRepository extends JpaRepository<Orfanato, Integer> {
 			+ " WHERE (i.idDoacao = :idDoacao)")
 	@Transactional(readOnly = true)
 	List<Orfanato> buscarOrfanatosInteressadosPorUmaDoacao(@Param("idDoacao") Integer idDoacao);
+	
+	@Query("SELECT b FROM Orfanato b WHERE quantidadeCriancas IN (SELECT MAX(quantidadeCriancas) from Orfanato a"
+			+ " WHERE a IN (SELECT o FROM Orfanato o LEFT JOIN Interesse i ON (o.id = i.idOrfanatoInteressado) "
+			+ " WHERE (i.idDoacao = :idDoacao))) ORDER BY DATE(b.dataFundacao) ASC")
+	@Transactional(readOnly = true)
+	List<Orfanato> recuperarOrfanatoContemplado(@Param("idDoacao") Integer idDoacao);
 
 	
 	Orfanato findByNomeIgnoreCase(String nome);

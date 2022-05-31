@@ -108,6 +108,13 @@ public class OrfanatoResource {
 
 		return ResponseEntity.ok().body(listaDTO);
 	}
+	
+	@GetMapping("/orfanatocontemplado")
+	public ResponseEntity<List<OrfanatoDTO>> recuperarOrfanatoContemplado(@RequestParam(value = "idDoacao", required = false) Integer idDoacao) {
+		List<Orfanato> lista = service.recuperarOrfanatoContemplado(idDoacao);
+		List<OrfanatoDTO> listaDTO = lista.stream().map(OrfanatoDTO::new).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listaDTO);
+	}
 
 
 }

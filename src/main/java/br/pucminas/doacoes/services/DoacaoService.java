@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import br.pucminas.doacoes.domain.Categoria;
 import br.pucminas.doacoes.domain.Doacao;
+import br.pucminas.doacoes.domain.Orfanato;
 import br.pucminas.doacoes.dtos.DoacaoDTO;
 import br.pucminas.doacoes.enums.SituacaoDoacao;
 import br.pucminas.doacoes.repositories.DoacaoRepository;
@@ -26,6 +27,9 @@ public class DoacaoService {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private OrfanatoService orfanatoService;
 	
 	/*public Doacao findById(Integer id) {
 		Optional<Doacao> obj = repository.findById(id);
@@ -164,6 +168,9 @@ public class DoacaoService {
 		// updateData(newObj, obj);
 		newObj.setSituacao(SituacaoDoacao.AUTORIZADA.getCod());
 		newObj.setDataAutorizacao(LocalDateTime.now());
+		
+		List<Orfanato> orfanatos = orfanatoService.recuperarOrfanatoContemplado(id);
+		newObj.setIdOrfanatoContemplado(orfanatos.get(0).getId());
 		return repository.save(newObj);
 	}
 	
