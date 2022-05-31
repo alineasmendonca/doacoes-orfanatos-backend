@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -48,6 +49,9 @@ public class Orfanato implements Serializable{
 	@NotEmpty(message = "O Campo TELEFONE é obrigatório")
 	@Length(min = 10, max = 10, message = "O Campo TELEFONE deve ter 10 caracteres")
 	private String telefone;
+	
+	@NotNull(message = "O Campo E-MAIL é obrigatório.")
+	private String email;
 	
 	@Override
 	public int hashCode() {

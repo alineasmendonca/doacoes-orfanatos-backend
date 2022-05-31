@@ -3,6 +3,7 @@ package br.pucminas.doacoes.dtos;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -47,6 +48,8 @@ public class OrfanatoDTO implements Serializable{
 	@Length(min = 10, max = 10, message = "O Campo TELEFONE deve ter 10 digítos")
 	private String telefone;
 
+	@NotNull(message = "O Campo E-MAIL é obrigatório.")
+	private String email;
 	
 	
 	public OrfanatoDTO(Orfanato obj) {
@@ -58,6 +61,7 @@ public class OrfanatoDTO implements Serializable{
 		this.historia = obj.getHistoria();
 		this.dataFundacao = obj.getDataFundacao();
 		this.telefone = obj.getTelefone();
+		this.email = obj.getEmail();
 	}
 	
 

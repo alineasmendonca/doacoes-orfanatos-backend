@@ -57,6 +57,7 @@ public class OrfanatoResource {
 	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<OrfanatoDTO> update(@PathVariable Integer id, @Valid @RequestBody Orfanato obj) throws Exception{
+		System.out.println(obj);
 		Orfanato newObj = service.update(id, obj);
 		return ResponseEntity.ok().body(new OrfanatoDTO(newObj));
 		

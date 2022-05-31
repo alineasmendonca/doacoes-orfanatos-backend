@@ -41,13 +41,14 @@ public class OrfanatoService {
 	}
 
 	private void updateData(Orfanato newObj, Orfanato obj) {
+		System.out.println(obj);
 		newObj.setDataFundacao(obj.getDataFundacao());
 		newObj.setEndereco(obj.getEndereco());
 		newObj.setHistoria(obj.getHistoria());
 		newObj.setNome(obj.getNome());
 		newObj.setQuantidadeCriancas(obj.getQuantidadeCriancas());
 		newObj.setTelefone(obj.getTelefone());
-		
+		newObj.setEmail(obj.getEmail());
 	}
 
 	public void delete(Integer id) throws Exception {
@@ -68,6 +69,7 @@ public class OrfanatoService {
             endereco = StringUtils.hasText(endereco) ? endereco.toLowerCase() : null;
             lista = repository.findByFiltros(nome, quantidadeCriancas, historia, endereco);
         }
+        System.out.println(lista);
         return lista;
     }
 	
@@ -117,6 +119,7 @@ public class OrfanatoService {
 		orfanato.setHistoria(orfanatoDTO.getHistoria());
 		orfanato.setDataFundacao(orfanatoDTO.getDataFundacao());
 		orfanato.setTelefone(orfanatoDTO.getTelefone());
+		orfanato.setEmail(orfanatoDTO.getEmail());
 
         return orfanato;
     }
